@@ -46,6 +46,229 @@ public class LogInfo {
 	List<String> ClassCallersOwnerClasses;
 	int ClassMethodsSize=0; 
 	
+	List<String> Callers; 
+	List<String> CallersPredictions; 
+	List<String> CallersOwners; 
+	
+	List<String> Callees; 
+	List<String> CalleesPredictions; 
+	List<String> CalleesOwners; 
+	
+	List<String> CallersCallers; 
+	List<String> CallersCallersPredictions; 
+	List<String> CallersCallersOwners; 
+	
+	List<String> CalleesCallees; 
+	List<String> CalleesCalleesPredictions; 
+	List<String> CalleesCalleesOwners; 
+	
+	List<String> ImplementationCallees;
+	List<String> ImplementationCalleePredictions;
+	List<String> ImplementationCalleesOwners;
+
+	List<String> InterfaceCallers;
+	List<String> InterfaceCallerPredictions;
+	List<String> InterfaceCallersOwners;
+
+	List<String> ChildrenCallees;
+	List<String> ChildrenCalleePredictions;
+	List<String> ChildrenCalleesOwners;
+
+	List<String> SuperclassCallers;
+	List<String> SuperclassCallerPredictions;
+	List<String> SuperclassCallersOwners;
+
+	
+	List<String> InterfacesCallersCallers; 
+	List<String> InterfacesCallersCallersPredictions; 
+	List<String> InterfacesCallersCallersOwners; 
+	
+	List<String> ImplementationCalleesCallees; 
+	List<String> ImplementationCalleesCalleesPredictions; 
+	List<String> ImplementationCalleesCalleesOwners; 
+	
+	List<String> SuperclassesCallersCallers; 
+	List<String> SuperclassesCallersCallersPredictions; 
+	List<String> SuperclassesCallersCallersOwners; 
+	
+	List<String> ChildrenCalleesCallees; 
+	List<String> ChildrenCalleesCalleesPredictions; 
+	List<String> ChildrenCalleesCalleesOwners; 
+	
+	public List<String> getCallersPredictions() {
+		return CallersPredictions;
+	}
+	public void setCallersPredictions(List<String> callersPredictions) {
+		CallersPredictions = callersPredictions;
+	}
+	public List<String> getCallersOwners() {
+		return CallersOwners;
+	}
+	public void setCallersOwners(List<String> callersOwners) {
+		CallersOwners = callersOwners;
+	}
+	public List<String> getCalleesPredictions() {
+		return CalleesPredictions;
+	}
+	public void setCalleesPredictions(List<String> calleesPredictions) {
+		CalleesPredictions = calleesPredictions;
+	}
+	public List<String> getCalleesOwners() {
+		return CalleesOwners;
+	}
+	public void setCalleesOwners(List<String> calleesOwners) {
+		CalleesOwners = calleesOwners;
+	}
+	public List<String> getCallersCallers() {
+		return CallersCallers;
+	}
+	public void setCallersCallers(List<String> callersCallers) {
+		CallersCallers = callersCallers;
+	}
+	public List<String> getCallersCallersPredictions() {
+		return CallersCallersPredictions;
+	}
+	public void setCallersCallersPredictions(List<String> callersCallersPredictions) {
+		CallersCallersPredictions = callersCallersPredictions;
+	}
+	public List<String> getCallersCallersOwners() {
+		return CallersCallersOwners;
+	}
+	public void setCallersCallersOwners(List<String> callersCallersOwners) {
+		CallersCallersOwners = callersCallersOwners;
+	}
+	public List<String> getCalleesCallees() {
+		return CalleesCallees;
+	}
+	public void setCalleesCallees(List<String> calleesCallees) {
+		CalleesCallees = calleesCallees;
+	}
+	public List<String> getCalleesCalleesPredictions() {
+		return CalleesCalleesPredictions;
+	}
+	public void setCalleesCalleesPredictions(List<String> calleesCalleesPredictions) {
+		CalleesCalleesPredictions = calleesCalleesPredictions;
+	}
+	public List<String> getCalleesCalleesOwners() {
+		return CalleesCalleesOwners;
+	}
+	public void setCalleesCalleesOwners(List<String> calleesCalleesOwners) {
+		CalleesCalleesOwners = calleesCalleesOwners;
+	}
+	public List<String> getImplementationCalleesOwners() {
+		return ImplementationCalleesOwners;
+	}
+	public void setImplementationCalleesOwners(List<String> implementationCalleesOwners) {
+		ImplementationCalleesOwners = implementationCalleesOwners;
+	}
+	public List<String> getInterfaceCallersOwners() {
+		return InterfaceCallersOwners;
+	}
+	public void setInterfaceCallersOwners(List<String> interfaceCallersOwners) {
+		InterfaceCallersOwners = interfaceCallersOwners;
+	}
+	public List<String> getChildrenCalleesOwners() {
+		return ChildrenCalleesOwners;
+	}
+	public void setChildrenCalleesOwners(List<String> childrenCalleesOwners) {
+		ChildrenCalleesOwners = childrenCalleesOwners;
+	}
+	public List<String> getSuperclassCallersOwners() {
+		return SuperclassCallersOwners;
+	}
+	public void setSuperclassCallersOwners(List<String> superclassCallersOwners) {
+		SuperclassCallersOwners = superclassCallersOwners;
+	}
+	public List<String> getInterfacesCallersCallers() {
+		return InterfacesCallersCallers;
+	}
+	public void setInterfacesCallersCallers(List<String> interfacesCallersCallers) {
+		InterfacesCallersCallers = interfacesCallersCallers;
+	}
+	public List<String> getInterfacesCallersCallersPredictions() {
+		return InterfacesCallersCallersPredictions;
+	}
+	public void setInterfacesCallersCallersPredictions(List<String> interfacesCallersCallersPredictions) {
+		InterfacesCallersCallersPredictions = interfacesCallersCallersPredictions;
+	}
+	public List<String> getInterfacesCallersCallersOwners() {
+		return InterfacesCallersCallersOwners;
+	}
+	public void setInterfacesCallersCallersOwners(List<String> interfacesCallersCallersOwners) {
+		InterfacesCallersCallersOwners = interfacesCallersCallersOwners;
+	}
+	public List<String> getImplementationCalleesCallees() {
+		return ImplementationCalleesCallees;
+	}
+	public void setImplementationCalleesCallees(List<String> implementationCalleesCallees) {
+		ImplementationCalleesCallees = implementationCalleesCallees;
+	}
+	public List<String> getImplementationCalleesCalleesPredictions() {
+		return ImplementationCalleesCalleesPredictions;
+	}
+	public void setImplementationCalleesCalleesPredictions(List<String> implementationCalleesCalleesPredictions) {
+		ImplementationCalleesCalleesPredictions = implementationCalleesCalleesPredictions;
+	}
+	public List<String> getImplementationCalleesCalleesOwners() {
+		return ImplementationCalleesCalleesOwners;
+	}
+	public void setImplementationCalleesCalleesOwners(List<String> implementationCalleesCalleesOwners) {
+		ImplementationCalleesCalleesOwners = implementationCalleesCalleesOwners;
+	}
+	public List<String> getSuperclassesCallersCallers() {
+		return SuperclassesCallersCallers;
+	}
+	public void setSuperclassesCallersCallers(List<String> superclassesCallersCallers) {
+		SuperclassesCallersCallers = superclassesCallersCallers;
+	}
+	public List<String> getSuperclassesCallersCallersPredictions() {
+		return SuperclassesCallersCallersPredictions;
+	}
+	public void setSuperclassesCallersCallersPredictions(List<String> superclassesCallersCallersPredictions) {
+		SuperclassesCallersCallersPredictions = superclassesCallersCallersPredictions;
+	}
+	public List<String> getSuperclassesCallersCallersOwners() {
+		return SuperclassesCallersCallersOwners;
+	}
+	public void setSuperclassesCallersCallersOwners(List<String> superclassesCallersCallersOwners) {
+		SuperclassesCallersCallersOwners = superclassesCallersCallersOwners;
+	}
+	public List<String> getChildrenCalleesCallees() {
+		return ChildrenCalleesCallees;
+	}
+	public void setChildrenCalleesCallees(List<String> childrenCalleesCallees) {
+		ChildrenCalleesCallees = childrenCalleesCallees;
+	}
+	public List<String> getChildrenCalleesCalleesPredictions() {
+		return ChildrenCalleesCalleesPredictions;
+	}
+	public void setChildrenCalleesCalleesPredictions(List<String> childrenCalleesCalleesPredictions) {
+		ChildrenCalleesCalleesPredictions = childrenCalleesCalleesPredictions;
+	}
+	public List<String> getChildrenCalleesCalleesOwners() {
+		return ChildrenCalleesCalleesOwners;
+	}
+	public void setChildrenCalleesCalleesOwners(List<String> childrenCalleesCalleesOwners) {
+		ChildrenCalleesCalleesOwners = childrenCalleesCalleesOwners;
+	}
+	public List<String> getImplementations() {
+		return Implementations;
+	}
+	public void setImplementations(List<String> implementations) {
+		Implementations = implementations;
+	}
+	public List<String> getInterfaces() {
+		return Interfaces;
+	}
+	public void setInterfaces(List<String> interfaces) {
+		Interfaces = interfaces;
+	}
+	public List<String> getSuperclasses() {
+		return Superclasses;
+	}
+	public void setSuperclasses(List<String> superclasses) {
+		Superclasses = superclasses;
+	}
 	List<String> ExtendedCallerPredictions;
 	List<String> ExtendedCalleesText;
 	List<String> ExtendedCalleePredictions;
@@ -60,15 +283,7 @@ public class LogInfo {
 	List<String> OuterOwnerCallees;
 	List<String> OuterOwnerCallers;
 	
-	List<String> ImplementationCallees;
-	List<String> ImplementationCalleePredictions;
-	List<String> InterfaceCallers;
-	List<String> InterfaceCallerPredictions;
-	
-	List<String> ChildrenCallees;
-	List<String> ChildrenCalleePredictions;
-	List<String> SuperclassCallers;
-	List<String> SuperclassCallerPredictions;
+
 	
 	public List<String> CallersText;
 	public List<String> CallerPredictionsText;
@@ -458,79 +673,73 @@ public class LogInfo {
 		System.out.println(MethodName);
 		MethodName=MethodName.replaceAll(",", "/"); 
 		RequirementName=RequirementName.replaceAll(",", "/"); 
-		String ExtendedCallerTextList=toString3(ExtendedCallersText); 
-		String ExtendedCalleeTextList=toString3(ExtendedCalleesText); 
-		String ExtendedCallerPredictionList=toString3(ExtendedCallerPredictions); 
-		String ExtendedCalleePredictionList=toString3(ExtendedCalleePredictions); 
-
-		String CallerTextList=toString3(CallersText); 
-		String CalleeTextList=toString3(CalleesText); 
-		String CallerPredictionList=toString3(CallerPredictionsText); 
-		String CalleePredictionList=toString3(CalleePredictionsText); 
+		String CallersList=toString3(Callers); 
+		String CallersOwnersList=toString3(CallersOwners); 
+		String CallersPredictionsList=toString3(CallersPredictions); 
+		String CalleesList=toString3(Callees); 
+		String CalleesOwnersList=toString3(CalleesOwners); 
+		String CalleesPredictionsList=toString3(CalleesPredictions); 
+		String CallersCallersList=toString3(CallersCallers); 
+		String CallersCallersOwnersList=toString3(CallersCallersOwners); 
+		String CallersCallersPredictionsList=toString3(CallersCallersPredictions); 
+		String CalleesCalleesList=toString3(CalleesCallees); 
+		String CalleesCalleesOwnersList=toString3(CalleesCalleesOwners); 
+		String CalleesCalleesPredictionsList=toString3(CalleesCalleesPredictions); 
+		
+		String InterfaceCallerList=toString3(InterfaceCallers); 
+		String InterfaceCallerOwnerList=toString3(InterfaceCallersOwners); 
+		String InterfaceCallerPredictionList=toString3(InterfaceCallerPredictions); 
 		
 		
-		String interfaceCallerList=toString3(InterfaceCallers); 
-		String interfaceCallerPredictionList=toString3(InterfaceCallerPredictions); 
-		String ImplementationCalleesList=toString3(ImplementationCallees); 
-		String ImplementationCalleesPredictionList=toString3(ImplementationCalleePredictions); 
+		String ImplementationCalleeList=toString3(ImplementationCallees); 
+		String ImplementationCalleeOwnerList=toString3(ImplementationCalleesOwners); 
+		String ImplementationCalleePredictionList=toString3(ImplementationCalleePredictions); 
 		
+		String SuperclassCallersCallersList=toString3(SuperclassesCallersCallers); 
+		String SuperclassCallersCallersOwnerList=toString3(SuperclassesCallersCallersOwners); 
+		String SuperclassCallersCallersPredictionList=toString3(SuperclassesCallersCallersPredictions); 
 		
-		String reqClass=this.RequirementID+"-"+this.ClassID; 
-		
-		
-		
+		String InterfaceCallersCallersList=toString3(InterfacesCallersCallers); 
+		String InterfaceCallersCallersOwnerList=toString3(InterfacesCallersCallersOwners); 
+		String InterfaceCallersCallersPredictionList=toString3(InterfacesCallersCallersPredictions); 
 		
 		String SuperclassCallerList=toString3(SuperclassCallers); 
+		String SuperclassCallerOwnerList=toString3(SuperclassCallersOwners); 
 		String SuperclassCallerPredictionList=toString3(SuperclassCallerPredictions); 
+		
 		String ChildrenCalleesList=toString3(ChildrenCallees); 
-		String ChildrenCalleesPredictionList=toString3(ChildrenCalleePredictions); 
-		
-		String OuterOwnerCallersList=toString3(OuterOwnerCallers); 
-		String OuterOwnerCallersPredictionList=toString3(OuterOwnerCallersPredictions); 
-		String OuterOwnerCalleesList=toString3(OuterOwnerCallees); 
-		String OuterOwnerCalleesPredictionList=toString3(OuterOwnerCalleesPredictions); 
-		
-		String InterfaceOwnerList=toString3(InterfaceOwners); 
-		String InterfaceOwnerPredictionList=toString3(InterfaceOwnersPredictions); 
-		String ImplementationOwnerList=toString3(ImplementationOwners); 
-		String ImplementationOwnerPredictionList=toString3(ImplementationOwnersPredictions); 
-		String SuperclassOwnerList=toString3(SuperclassOwners); 
-		String SuperclassOwnerPredictionList=toString3(SuperclassOwnersPredictions); 
-		String ChildrenOwnerList=toString3(ChildrenOwners); 
-		String ChildrenOwnerPredictionList=toString3(ChildrenOwnersPredictions); 
-		
-		String SuperclassList=toString3(Superclasses); 
-		String SuperclassPredictionList=toString3(SuperclassPredictions); 
-		String ChildrenList=toString3(Children); 
-		String ChildrenPredictionList=toString3(ChildrenPredictions); 
+		String ChildrenCalleeOwnerList=toString3(ChildrenCalleesOwners); 
+		String ChildrenCalleePredictionList=toString3(ChildrenCalleePredictions); 
 		
 		
-		String interfaceList=toString3(Interfaces); 
-		String interfacePredictionList=toString3(InterfacePredictions); 
-		String ImplementationsList=toString3(Implementations); 
-		String ImplementationsPredictionList=toString3(ImplementationPredictions); 
+		String ChildrenCalleesCalleesList=toString3(ChildrenCalleesCallees); 
+		String ChildrenCalleesCalleesOwnerList=toString3(ChildrenCalleesCalleesOwners); 
+		String ChildrenCalleesCalleesPredictionList=toString3(ChildrenCalleesCalleesPredictions); 
 		
+		String ImplementationCalleesCalleesList=toString3(ImplementationCalleesCallees); 
+		String ImplementationCalleesCalleesOwnerList=toString3(ImplementationCalleesCalleesOwners); 
+		String ImplementationCalleesCalleesPredictionList=toString3(ImplementationCalleesCalleesPredictions); 
 		
-		String ClassCallersOwnerClassesList=toString3(ClassCallersOwnerClasses); 
-		String ClassCalleesOwnerClassesList=toString3(ClassCalleesOwnerClasses); 
+		String reqClass= RequirementID+"-"+ClassID; 
+		
 		
 		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName
-				+","+ClassMethodsSize+","+ClassCallersOwnerClassesList+","+ClassCalleesOwnerClassesList
+				
 				+","+TraceValue+","+DatabaseInput.OwnerTraceHashMap.get(reqClass)
 		
-				+","+interfaceList+","+interfacePredictionList+","+ImplementationsList+","+ImplementationsPredictionList
-				+","+SuperclassList+","+SuperclassPredictionList+","+ChildrenList+","+ChildrenPredictionList		
+				+","+CallersList+","+CallersPredictionsList+","+CallersOwnersList
+				+","+InterfaceCallerList+","+InterfaceCallerPredictionList+","+InterfaceCallerOwnerList
+				+","+SuperclassCallerList+","+SuperclassCallerPredictionList+","+SuperclassCallerOwnerList
+				+","+CallersCallersList+","+CallersCallersPredictionsList+","+CallersCallersOwnersList
+				+","+InterfaceCallersCallersList+","+InterfaceCallersCallersPredictionList+","+InterfaceCallersCallersOwnerList
+				+","+SuperclassCallersCallersList+","+SuperclassCallersCallersPredictionList+","+SuperclassCallersCallersOwnerList
 				
-		+","+interfaceCallerList+","+interfaceCallerPredictionList+","+ImplementationCalleesList+","+ImplementationCalleesPredictionList
-		+","+SuperclassCallerList+","+SuperclassCallerPredictionList+","+ChildrenCalleesList+","+ChildrenCalleesPredictionList
-		
-
-		+","+CallerTextList+","+CallerPredictionList+","+CalleeTextList+","+CalleePredictionList
-		+","+ExtendedCallerTextList+","+ExtendedCallerPredictionList+","+ExtendedCalleeTextList+","+ExtendedCalleePredictionList
-
-		+","+OuterOwnerCallersList+","+OuterOwnerCallersPredictionList+","+OuterOwnerCalleesList+","+OuterOwnerCalleesPredictionList
-		+","+InterfaceOwnerList+","+InterfaceOwnerPredictionList+","+ImplementationOwnerList+","+ImplementationOwnerPredictionList
-		+","+SuperclassOwnerList+","+SuperclassOwnerPredictionList+","+ChildrenOwnerList+","+ChildrenOwnerPredictionList
+				+","+CalleesList+","+CalleesPredictionsList+","+CalleesOwnersList
+				+","+ImplementationCalleeList+","+ImplementationCalleePredictionList+","+ImplementationCalleeOwnerList
+				+","+ChildrenCalleesList+","+ChildrenCalleePredictionList+","+ChildrenCalleeOwnerList
+				+","+CalleesCalleesList+","+CalleesCalleesPredictionsList+","+CalleesCalleesOwnersList
+				+","+ImplementationCalleesCalleesList+","+ImplementationCalleesCalleesPredictionList+","+ImplementationCalleesCalleesOwnerList
+				+","+ChildrenCalleesCalleesList+","+ChildrenCalleesCalleesPredictionList+","+ChildrenCalleesCalleesOwnerList
 		+","+PrecisionRecall	
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
@@ -842,69 +1051,85 @@ public class LogInfo {
 		if (ProgramName.equals("chess")) {
 			LogInfo.bwfileChess.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
-					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassValue"
-					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
-					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
-					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
-					+"	,SuperclassCallerList,SuperclassCallerPredictionList,ChildrenCalleesList,ChildrenCalleesPredictionList"
-					+ ",Callers, CallerPredictions, Callees, CalleePredictions, "
-					+ "ExtendedCallers, ExtendedCallerPredictions, ExtendedCallees, ExtendedCalleePredictions,"
-					+ " OuterOwnerCallers, OuterOwnerCallerPredictions, OuterOwnerCallees, OuterOwnerCalleePredictions, "
-					+"InterfaceOwners, InterfaceOwnerPredictions, ImplementationOwners, ImplementationOwnerPredictions, "
-					+"SuperclassOwners, SuperclassOwnerPredictions, ChildrenOwners, ChildrenOwnerPredictions,"
-					+ "PrecisionRecall,IterationValues");
+					+ "Gold, TraceClassValue,"
+					+" Callers, CallersPredictions, CallersOwnerValues,"
+					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
+					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+					+" InterfaceCallersCallers, InterfaceCallersCallersPredictions, InterfaceCallersCallersOwnerValues,"
+					+" SuperclassCallersCallers, SuperclassCallersCallersPredictions, SuperclassCallersCallersOwnerValues,"
+					
+					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
+					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
+					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+ "PrecisionRecall,IterationValues"
+					);
 			LogInfo.bwfileChess.newLine();
 		}
 		if (ProgramName.equals("gantt")) {
 			LogInfo.bwfile2.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
-					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassValue"
-					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
-					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
-					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
-					+"	,SuperclassCallerList,SuperclassCallerPredictionList,ChildrenCalleesList,ChildrenCalleesPredictionList"
-					+ ",Callers, CallerPredictions, Callees, CalleePredictions, "
-					+ "ExtendedCallers, ExtendedCallerPredictions, ExtendedCallees, ExtendedCalleePredictions,"
-					+ " OuterOwnerCallers, OuterOwnerCallerPredictions, OuterOwnerCallees, OuterOwnerCalleePredictions, "
-					+"InterfaceOwners, InterfaceOwnerPredictions, ImplementationOwners, ImplementationOwnerPredictions, "
-					+"SuperclassOwners, SuperclassOwnerPredictions, ChildrenOwners, ChildrenOwnerPredictions,"
-					+ "PrecisionRecall,IterationValues");
+					+ "Gold, TraceClassValue,"
+					+" Callers, CallersPredictions, CallersOwnerValues,"
+					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
+					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+					+" InterfaceCallersCallers, InterfaceCallersCallersPredictions, InterfaceCallersCallersOwnerValues,"
+					+" SuperclassCallersCallers, SuperclassCallersCallersPredictions, SuperclassCallersCallersOwnerValues,"
+					
+					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
+					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
+					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+ "PrecisionRecall,IterationValues"
+					);
 			LogInfo.bwfile2.newLine();
 		}
 		if (ProgramName.equals("itrust")) {
 			LogInfo.bwfile3.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
-					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassValue"
-					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
-					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
-					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
-					+"	,SuperclassCallerList,SuperclassCallerPredictionList,ChildrenCalleesList,ChildrenCalleesPredictionList"
-					+ ",Callers, CallerPredictions, Callees, CalleePredictions, "
-					+ "ExtendedCallers, ExtendedCallerPredictions, ExtendedCallees, ExtendedCalleePredictions,"
-					+ " OuterOwnerCallers, OuterOwnerCallerPredictions, OuterOwnerCallees, OuterOwnerCalleePredictions, "
-					+"InterfaceOwners, InterfaceOwnerPredictions, ImplementationOwners, ImplementationOwnerPredictions, "
-					+"SuperclassOwners, SuperclassOwnerPredictions, ChildrenOwners, ChildrenOwnerPredictions,"
-					+ "PrecisionRecall,IterationValues");
+					+ "Gold, TraceClassValue,"
+					+" Callers, CallersPredictions, CallersOwnerValues,"
+					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
+					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+					+" InterfaceCallersCallers, InterfaceCallersCallersPredictions, InterfaceCallersCallersOwnerValues,"
+					+" SuperclassCallersCallers, SuperclassCallersCallersPredictions, SuperclassCallersCallersOwnerValues,"
+					
+					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
+					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
+					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+ "PrecisionRecall,IterationValues"
+					);
 			LogInfo.bwfile3.newLine();
 		}
 		if (ProgramName.equals("jhotdraw")) {
 			LogInfo.bwfile4.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
-					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassValue"
-					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
-					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
-					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
-					+"	,SuperclassCallerList,SuperclassCallerPredictionList,ChildrenCalleesList,ChildrenCalleesPredictionList"
-					+ ",Callers, CallerPredictions, Callees, CalleePredictions, "
-					+ "ExtendedCallers, ExtendedCallerPredictions, ExtendedCallees, ExtendedCalleePredictions,"
-					+ " OuterOwnerCallers, OuterOwnerCallerPredictions, OuterOwnerCallees, OuterOwnerCalleePredictions, "
-					+"InterfaceOwners, InterfaceOwnerPredictions, ImplementationOwners, ImplementationOwnerPredictions, "
-					+"SuperclassOwners, SuperclassOwnerPredictions, ChildrenOwners, ChildrenOwnerPredictions,"
-					+ "PrecisionRecall,IterationValues");
+					+ "Gold, TraceClassValue,"
+					+" Callers, CallersPredictions, CallersOwnerValues,"
+					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
+					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+					+" InterfaceCallersCallers, InterfaceCallersCallersPredictions, InterfaceCallersCallersOwnerValues,"
+					+" SuperclassCallersCallers, SuperclassCallersCallersPredictions, SuperclassCallersCallersOwnerValues,"
+					
+					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
+					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
+					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+ "PrecisionRecall,IterationValues"
+					);
 			LogInfo.bwfile4.newLine();
 		}
 
