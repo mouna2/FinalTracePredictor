@@ -502,11 +502,12 @@ public class LogInfo {
 	public void setSuperclassCallerPredictions(List<String> superclassCallerPredictions) {
 		SuperclassCallerPredictions = superclassCallerPredictions;
 	}
+	
 	public List<String> getCallers() {
-		return CallersText;
+		return Callers;
 	}
-	public void setCallers(List<String> originalCallers) {
-		CallersText = originalCallers;
+	public void setCallers(List<String> callers) {
+		Callers = callers;
 	}
 	public List<String> getCallerPredictions() {
 		return CallerPredictionsText;
@@ -517,11 +518,9 @@ public class LogInfo {
 	public List<String> getCallees() {
 		return CalleesText;
 	}
-	public void setCallees(List<String> originalCallees) {
-		CalleesText = originalCallees;
-	}
-	public List<String> getCalleePredictions() {
-		return CalleePredictionsText;
+	
+	public void setCallees(List<String> callees) {
+		Callees = callees;
 	}
 	public void setCalleePredictions(List<String> originalCalleePredictions) {
 		CalleePredictionsText = originalCalleePredictions;
