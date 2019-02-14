@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -669,7 +670,7 @@ public class LogInfo {
 	
 	@Override
 	public String toString() {
-		System.out.println(MethodName);
+//		System.out.println(MethodName);
 		MethodName=MethodName.replaceAll(",", "/"); 
 		RequirementName=RequirementName.replaceAll(",", "/"); 
 		String CallersList=toString3(Callers); 
@@ -886,11 +887,7 @@ public class LogInfo {
 			FileOutputStream fosfilChess = new FileOutputStream(filelogChess);
 			bwfileChess = new BufferedWriter(new OutputStreamWriter(fosfilChess));
 			
-			File filelogFPChess = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\FalsePositiveDetailsChess.txt");
-			FileOutputStream fosfilaFPChess = new FileOutputStream(filelogFPChess);
-			 bwfile3Chess = new BufferedWriter(new OutputStreamWriter(fosfilaFPChess));
-			 
-			 
+		
 			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
 				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
@@ -908,10 +905,7 @@ public class LogInfo {
 			FileOutputStream fosfila2 = new FileOutputStream(filelog2);
 			bwfile2 = new BufferedWriter(new OutputStreamWriter(fosfila2));
 			
-			File filelogFP = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\FalsePositiveDetailsGantt.txt");
-			FileOutputStream fosfilaFP = new FileOutputStream(filelogFP);
-			 bwfileFP = new BufferedWriter(new OutputStreamWriter(fosfilaFP));
-			 
+		
 			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt");
 				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
@@ -927,9 +921,7 @@ public class LogInfo {
 			FileOutputStream fosfila5 = new FileOutputStream(filelog3);
 			bwfile3 = new BufferedWriter(new OutputStreamWriter(fosfila5));
 			
-			File filelog3iTrust = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\FalsePositiveDetailsiTrust.txt");
-			FileOutputStream fosfila5iTrust = new FileOutputStream(filelog3iTrust);
-			bwfile3iTrust = new BufferedWriter(new OutputStreamWriter(fosfila5iTrust));
+			
 			
 			
 			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt");
@@ -947,13 +939,7 @@ public class LogInfo {
 			FileOutputStream fosfila4 = new FileOutputStream(filelog4);
 			bwfile4 = new BufferedWriter(new OutputStreamWriter(fosfila4));
 			
-			File filelogFN = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\FalseNegativeDetailsJHotDraw.txt");
-			FileOutputStream fosfilaFN = new FileOutputStream(filelogFN);
-			 bwfileFN = new BufferedWriter(new OutputStreamWriter(fosfilaFN));
-			 
-			 File filelog3JHotDraw = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\FalsePositiveDetailsJHotDraw.txt");
-				FileOutputStream fosfila5JHotDraw = new FileOutputStream(filelog3JHotDraw);
-				bwfile3jHotDraw = new BufferedWriter(new OutputStreamWriter(fosfila5JHotDraw));
+			
 				
 				
 				File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt");
@@ -1046,7 +1032,8 @@ public class LogInfo {
 	}
 	public static void updateTableLog(String ProgramName, Collection<MethodTrace> MethodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) throws IOException {
 		// TODO Auto-generated method stub			
-
+		 // Create a new file output stream.
+       
 		if (ProgramName.equals("chess")) {
 			LogInfo.bwfileChess.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
@@ -1069,6 +1056,7 @@ public class LogInfo {
 			LogInfo.bwfileChess.newLine();
 		}
 		if (ProgramName.equals("gantt")) {
+			
 			LogInfo.bwfile2.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+ "Gold, TraceClassValue,"
@@ -1090,6 +1078,29 @@ public class LogInfo {
 			LogInfo.bwfile2.newLine();
 		}
 		if (ProgramName.equals("itrust")) {
+			 // Create a new file output stream.
+            PrintStream fileOut = new PrintStream("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
+            
+            // Redirect standard out to file.
+//            System.setOut(fileOut);
+//			System.out.println(
+//					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
+//					+ "Gold, TraceClassValue,"
+//					+" Callers, CallersPredictions, CallersOwnerValues,"
+//					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
+//					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
+//					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+//					+" InterfaceCallersCallers, InterfaceCallersCallersPredictions, InterfaceCallersCallersOwnerValues,"
+//					+" SuperclassCallersCallers, SuperclassCallersCallersPredictions, SuperclassCallersCallersOwnerValues,"
+//					
+//					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+//					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
+//					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
+//					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+//					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
+//					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+//					+ "PrecisionRecall,IterationValues"
+//					);
 			LogInfo.bwfile3.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+ "Gold, TraceClassValue,"
@@ -1131,19 +1142,17 @@ public class LogInfo {
 					);
 			LogInfo.bwfile4.newLine();
 		}
-
+		int count=0; 
 		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 			String reqmethod = methodtrace.Requirement.ID + "-" + methodtrace.Method.ID;
+			
 			LogInfoHashMap.get(reqmethod);
 			
 			if (ProgramName.equals("gantt")) {
 				LogInfo.bwfile2.write(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile2.newLine();
 				
-				if(LogInfoHashMap.get(reqmethod).PrecisionRecall.equals("FP")) {
-					LogInfo.bwfileFP.write(LogInfoHashMap.get(reqmethod).toString());
-					LogInfo.bwfileFP.newLine();
-				}
+			
 				
 			}
 			if (ProgramName.equals("chess")) {
@@ -1151,19 +1160,16 @@ public class LogInfo {
 				LogInfo.bwfileChess.newLine();
 				
 				
-				if(LogInfoHashMap.get(reqmethod).PrecisionRecall.equals("FP")) {
-					LogInfo.bwfile3Chess.write(LogInfoHashMap.get(reqmethod).toString());
-					LogInfo.bwfile3Chess.newLine();
-				}
+				
 			}
 			if (ProgramName.equals("itrust")) {
+//				System.out.println(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile3.write(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile3.newLine();
 				
-				if(LogInfoHashMap.get(reqmethod).PrecisionRecall.equals("FP")) {
-					LogInfo.bwfile3iTrust.write(LogInfoHashMap.get(reqmethod).toString());
-					LogInfo.bwfile3iTrust.newLine();
-				}
+//				System.out.println("=======>"+reqmethod+"------"+count+"---"+LogInfoHashMap.get(reqmethod).toString());
+				count++; 
+//			
 			}
 			if (ProgramName.equals("jhotdraw")) {
 				LogInfo.bwfile4.write(LogInfoHashMap.get(reqmethod).toString());
@@ -1171,15 +1177,9 @@ public class LogInfo {
 				
 				
 				
-				if(LogInfoHashMap.get(reqmethod).PrecisionRecall.equals("FN")) {
-					LogInfo.bwfileFN.write(LogInfoHashMap.get(reqmethod).toString());
-					LogInfo.bwfileFN.newLine();
-				}
 				
-				if(LogInfoHashMap.get(reqmethod).PrecisionRecall.equals("FP")) {
-					LogInfo.bwfile3jHotDraw.write(LogInfoHashMap.get(reqmethod).toString());
-					LogInfo.bwfile3jHotDraw.newLine();
-				}
+				
+				
 			}
 		}
 

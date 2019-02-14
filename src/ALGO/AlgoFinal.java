@@ -1459,19 +1459,20 @@ public class AlgoFinal extends JFrame {
 //			
 //		}
 		
-		
+				int counter2=0; 
 				for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 					
 						methodtrace.UpdateCallersCallees(LogInfoHashMap);
-					
-					
+						counter2++; 
+						System.out.println("COUNTER2  "+counter2);
+				}	
 	
 				
 					
 					
 	
 					
-					}	
+					
 		System.out.println(ITERATION);
 		System.out.println("FINISJED");
 	
@@ -1524,15 +1525,21 @@ public class AlgoFinal extends JFrame {
 		 TotalPattern = new PredictionEvaluation();
 		 RemainingpredictionValues = new PredictionValues(); 
 		
-
+		 System.out.println("YES");
+		
 
 
 		ResetAllTraceSetFlags(methodtraces2HashMap);
+		 System.out.println("YES2");
 		 LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, TotalPattern, ProgramName, TotalPredictionValues, LogInfoHashMap);
-			RemainingpredictionValues=SubstractPredictionValues(TotalPredictionValues, OwnerClassPredictionValues); 
-			LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
-		LogInfo.updateResultsLog(TotalPattern, TotalPredictionValues, ProgramName,"TOTAL  PREDICTION", "total prediction values");
-		LogInfo.closeLogFile(); 
+		 System.out.println("YES3");	
+		 RemainingpredictionValues=SubstractPredictionValues(TotalPredictionValues, OwnerClassPredictionValues); 
+		 System.out.println("YES4");
+		 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+		 System.out.println("YES5");
+		 LogInfo.updateResultsLog(TotalPattern, TotalPredictionValues, ProgramName,"TOTAL  PREDICTION", "total prediction values");
+		 System.out.println("YES6");
+		 LogInfo.closeLogFile(); 
 		
 		
 
@@ -1796,19 +1803,19 @@ public class AlgoFinal extends JFrame {
 	/**
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
-		String ProgramName = "chess";
-		AlgoFinal frame = new AlgoFinal(
-				ProgramName);
-
-		String ProgramName2 = "gantt";
-			 frame = new AlgoFinal(ProgramName2);
+//		String ProgramName = "chess";
+//		AlgoFinal frame = new AlgoFinal(
+//				ProgramName);
+//
+//		String ProgramName2 = "gantt";
+//			 frame = new AlgoFinal(ProgramName2);
 
 		String ProgramName3 = "itrust";
-			 frame = new AlgoFinal(ProgramName3);
+		AlgoFinal	 frame = new AlgoFinal(ProgramName3);
 
 		
-		String ProgramName4 = "jhotdraw";
-				frame = new AlgoFinal(ProgramName4);
+//		String ProgramName4 = "jhotdraw";
+//				frame = new AlgoFinal(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);

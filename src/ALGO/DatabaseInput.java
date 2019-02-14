@@ -31,7 +31,7 @@ public class DatabaseInput {
 	static LinkedHashMap<String, String> SubjectTraceHashMap = new LinkedHashMap<String, String>();
 
 
-
+	static List<ArrayList<String>> CallsList = new ArrayList<ArrayList<String>>(); 
 	
 
 
@@ -157,7 +157,7 @@ public static void CreateMethodCallsHashMapCallersCallees(Connection conn) throw
 //					HashMap<String, MethodList> CallerIndexedHashMap= new HashMap<String, MethodList>(); 
 
 					while (methodcalls.next()) {
-	
+						ArrayList<String> CallingRelation= new ArrayList<String>(); 
 						String callerid = methodcalls.getString("callermethodid");
 						String calleeid = methodcalls.getString("calleemethodid");
 						
@@ -167,6 +167,10 @@ public static void CreateMethodCallsHashMapCallersCallees(Connection conn) throw
 						
 						callerMethod.Callees.add(calleeMethod);
 						calleeMethod.Callers.add(callerMethod);
+						
+						CallingRelation.add(callerid); 
+						CallingRelation.add(calleeid); 
+						CallsList.add(CallingRelation); 
 						//comment out 				
 //						CalleeIndexedHashMap.put(calleeid, calleeMethod.Callers); 
 //						CallerIndexedHashMap.put(callerid, callerMethod.Callees); 
@@ -376,6 +380,11 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 		
 		CreateMethodHashMap(conn);
 		CreateMethodCallsHashMapCallersCallees(conn); 
+	
+		
+//		CreateMethodCallersofCallersHashMap(conn); 
+//		CreateMethodCallersofCallersInterfacesImplementationsHashMap(conn); 
+
 		CreateRequirementsHashMap(conn); 
 
 		CreateClassTraces(conn); 
@@ -386,6 +395,100 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 
 		return methodtraceHashMap;
 	}
+
+//	private static void CreateMethodCallersofCallersInterfacesImplementationsHashMap(Connection conn) throws SQLException {
+//	// TODO Auto-generated method stub
+//		
+//
+//		 
+//				for(ArrayList<String> callingrelation: CallsList) {
+//					String callerid=callingrelation.get(0); 
+//					String calleeid=callingrelation.get(1); 
+//
+//					mypackage.Method callerMethod = MethodHashMap.get(callerid); 
+//					mypackage.Method calleeMethod = MethodHashMap.get(calleeid); 
+//					
+//					
+//					
+//					for(Method calleeofcallee: callerMethod.CalleesofCallees) {
+//						for(Method calleeofcalleeImp: calleeofcallee.Implementations) {
+//							
+//								calleeMethod.CalleesofCalleesImplementations.addAll(calleeofcalleeImp.Callees); 
+//							
+//						}
+//					}
+//					
+//					for(Method calleeofcallee: callerMethod.CalleesofCallees) {
+//						for(Method calleeofcalleeChild: calleeofcallee.Children) {
+//							
+//								calleeMethod.CalleesofCalleesChildren.addAll(calleeofcalleeChild.Callees); 
+//							
+//						}
+//					}
+//				
+//					for(Method callerofcaller: calleeMethod.CallersofCallers) {
+//						for(Method callerofcallerInterface: callerofcaller.Interfaces) {
+//							
+//								calleeMethod.CallersofCallersInterfaces.addAll(callerofcallerInterface.Callers); 
+//							
+//						}
+//					}
+//					
+//					for(Method callerofcaller: calleeMethod.CallersofCallers) {
+//						for(Method callerofcallerSuperclass: callerofcaller.Superclasses) {
+//							
+//								calleeMethod.CallersofCallersSuperclasses.addAll(callerofcallerSuperclass.Callers); 
+//							
+//						}
+//					}
+//				 
+//				}
+//				
+//			 
+//			 
+//			 
+//		 
+//				
+//}
+//
+//
+//
+//
+//	private static void CreateMethodCallersofCallersHashMap(Connection conn) throws SQLException {
+//	// TODO Auto-generated method stub
+//		for(ArrayList<String> callingrelation: CallsList) {
+//			String callerid=callingrelation.get(0); 
+//			String calleeid=callingrelation.get(1); 
+//		
+//			 	
+//				
+//			 	mypackage.Method callerMethod = MethodHashMap.get(callerid); 
+//				mypackage.Method calleeMethod = MethodHashMap.get(calleeid); 
+//				
+//				callerMethod.CalleesofCallees.AddAll(calleeMethod.Callees); 
+//				calleeMethod.CallersofCallers.AddAll(callerMethod.Callers); 
+//				
+//				for(Method myinterface: callerMethod.Interfaces) {
+//					callerMethod.CallersInterfaces.addAll(myinterface.Callers); 
+//				}
+//				for(Method mysuperclass: callerMethod.Superclasses) {
+//					callerMethod.CallersSuperclasses.addAll(mysuperclass.Callers); 
+//				}
+//				
+//				for(Method myimplementation: calleeMethod.Implementations) {
+//					calleeMethod.CalleesImplementations.addAll(myimplementation.Callees); 
+//				}
+//				for(Method mychild: calleeMethod.Children) {
+//					calleeMethod.CalleesChildren.addAll(mychild.Callees); 
+//				}
+//				
+//		 
+//		}
+//		}
+//
+
+
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////

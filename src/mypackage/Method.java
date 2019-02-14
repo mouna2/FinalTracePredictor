@@ -29,6 +29,15 @@ public class Method {
 	public MethodList Callees= new MethodList(); 
 	public MethodList Callers= new MethodList(); 
 	public MethodList CallersofCallers= new MethodList(); 
+	public MethodList CalleesofCallees= new MethodList(); 
+	public MethodList CalleesImplementations= new MethodList(); 
+	public MethodList CallersInterfaces= new MethodList(); 
+	public MethodList CallersofCallersInterfaces= new MethodList(); 
+	public MethodList CalleesofCalleesImplementations= new MethodList(); 
+	public MethodList CalleesChildren= new MethodList(); 
+	public MethodList CallersSuperclasses= new MethodList(); 
+	public MethodList CallersofCallersSuperclasses= new MethodList(); 
+	public MethodList CalleesofCalleesChildren= new MethodList(); 
 	public MethodList Interfaces= new MethodList(); 
 	public MethodList Implementations= new MethodList(); 
 	public MethodList Superclasses= new MethodList(); 
@@ -36,11 +45,76 @@ public class Method {
 	//	public List<RequirementGold> requirementsGold= new ArrayList<RequirementGold>(); 
 	//	public List<Requirement2> requirements= new ArrayList<Requirement2>(); 
 	//	public	HashMap<Requirement2, String> FinalMethodHashMap= new HashMap<Requirement2, String>(); 
-	public MethodList CalleesofCallees= new MethodList(); 
 
 
 	public Clazz getOwner() {
 		return Owner;
+	}
+	public MethodList getCallersofCallers() {
+		return CallersofCallers;
+	}
+	public void setCallersofCallers(MethodList callersofCallers) {
+		CallersofCallers = callersofCallers;
+	}
+	public MethodList getCalleesofCallees() {
+		return CalleesofCallees;
+	}
+	public void setCalleesofCallees(MethodList calleesofCallees) {
+		CalleesofCallees = calleesofCallees;
+	}
+	public MethodList getCalleesImplementations() {
+		return CalleesImplementations;
+	}
+	public void setCalleesImplementations(MethodList calleesImplementations) {
+		CalleesImplementations = calleesImplementations;
+	}
+	public MethodList getCallersInterfaces() {
+		return CallersInterfaces;
+	}
+	public void setCallersInterfaces(MethodList callersInterfaces) {
+		CallersInterfaces = callersInterfaces;
+	}
+	public MethodList getCallersofCallersInterfaces() {
+		return CallersofCallersInterfaces;
+	}
+	public void setCallersofCallersInterfaces(MethodList callersofCallersInterfaces) {
+		CallersofCallersInterfaces = callersofCallersInterfaces;
+	}
+	public MethodList getCalleesofCalleesImplementations() {
+		return CalleesofCalleesImplementations;
+	}
+	public void setCalleesofCalleesImplementations(MethodList calleesofCalleesImplementations) {
+		CalleesofCalleesImplementations = calleesofCalleesImplementations;
+	}
+	public MethodList getCalleesChildren() {
+		return CalleesChildren;
+	}
+	public void setCalleesChildren(MethodList calleesChildren) {
+		CalleesChildren = calleesChildren;
+	}
+	public MethodList getCallersSuperclasses() {
+		return CallersSuperclasses;
+	}
+	public void setCallersSuperclasses(MethodList callersSuperclasses) {
+		CallersSuperclasses = callersSuperclasses;
+	}
+	public MethodList getCallersofCallersSuperclasses() {
+		return CallersofCallersSuperclasses;
+	}
+	public void setCallersofCallersSuperclasses(MethodList callersofCallersSuperclasses) {
+		CallersofCallersSuperclasses = callersofCallersSuperclasses;
+	}
+	public MethodList getCalleesofCalleesChildren() {
+		return CalleesofCalleesChildren;
+	}
+	public void setCalleesofCalleesChildren(MethodList calleesofCalleesChildren) {
+		CalleesofCalleesChildren = calleesofCalleesChildren;
+	}
+	public MethodList getCallees() {
+		return Callees;
+	}
+	public MethodList getCallers() {
+		return Callers;
 	}
 	public void setOwner(Clazz owner) {
 		this.Owner = owner;
@@ -92,10 +166,13 @@ public class Method {
 
 	@Override
 	public String toString() {
-		return  ID + ", methodname=" + methodname + 
-				//				", requirementsGold="
+		return  ID + ", methodname=" + methodname 
+				 
+				//			+	", requirementsGold="
 				//				+ requirementsGold.toString() + 
-				Owner.toString()+"]";
+//				+Owner.toString()+"]"
+//				+"[ ClassID"+Owner.ID+"  ClassName "+Owner.classname +" ]"
+				;
 	}
 
 	public String toString2() {

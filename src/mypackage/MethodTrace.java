@@ -149,6 +149,9 @@ public final class MethodTrace {
 			
 		}
 
+
+		
+		
 	
 
 		
@@ -204,6 +207,103 @@ public final class MethodTrace {
 		
 		
 		String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
+		
+		
+		
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		//CALLERS 
+//		for(Method caller: this.Method.Callers) {
+//			Callers.add(caller.toString()); 
+//			SetPredictionsSetOwners(caller, this, CallersPredictions, CallersOwners); 
+//			
+//			
+//		}
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		//CALLEES
+//		for(Method callee: this.Method.Callees) {
+//			Callees.add(callee.toString()); 
+//			SetPredictionsSetOwners(callee, this, CalleesPredictions, CalleesOwners); 
+//
+//			
+//			
+//		}
+//		
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLERS INTERFACES 
+//			for(Method caller: this.Method.CallersInterfaces) {
+//					InterfaceCallers.add(caller.toString()); 
+//					SetPredictionsSetOwners(caller, this, InterfaceCallersPredictions, InterfaceCallersOwners); 
+//			}
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLERS INTERFACES 
+//			for(Method caller: this.Method.CallersInterfaces) {
+//				SuperclassCallers.add(caller.toString()); 
+//				SetPredictionsSetOwners(caller, this, SuperclassCallersPredictions, SuperclassCallersOwners); 
+//			}
+//		
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLEES IMPLEMENTATIONS 
+//			for(Method callee: this.Method.CalleesImplementations) {
+//				ImplementationCallees.add(callee.toString()); 
+//				SetPredictionsSetOwners(callee, this, ImplementationCalleesPredictions, ImplementationCalleesOwners); 
+//			}
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLEES CHILDREN  
+//			for(Method callee: this.Method.CalleesChildren) {
+//				ChildrenCallees.add(callee.toString()); 
+//				SetPredictionsSetOwners(callee, this, ChildrenCalleesPredictions, ChildrenCalleesOwners); 
+//			}
+//		
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLEES OF CALLEES   
+//			for(Method callee: this.Method.CalleesofCallees) {
+//				CalleesofCallees.add(callee.toString()); 
+//				SetPredictionsSetOwners(callee, this, CalleesofCalleesPredictions, CalleesofCalleesOwners); 
+//			}
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLEES OF CALLEES IMPLEMENTATIONS 
+//			for(Method callee: this.Method.CalleesofCalleesImplementations) {
+//				ImplementationCalleesofCallees.add(callee.toString()); 
+//				SetPredictionsSetOwners(callee, this, ImplementationCalleesofCalleesPredictions, ImplementationCalleesofCalleesOwners); 
+//			}
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			////////////////////////////////////////////////////////////////////////////////////////////
+//			//CALLEES OF CALLEES CHILDREN  
+//			for(Method callee: this.Method.CalleesofCalleesChildren) {
+//				ChildrenCalleesofCallees.add(callee.toString()); 
+//				SetPredictionsSetOwners(callee, this, ChildrenCalleesofCalleesPredictions, ChildrenCalleesofCalleesOwners); 
+//			}
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		//CALLERS OF CALLERS   
+//		for(Method caller: this.Method.CallersofCallers) {
+//			CallersofCallers.add(caller.toString()); 
+//			SetPredictionsSetOwners(caller, this, CallersofCallersPredictions, CallersofCallersOwners); 
+//		}
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		//CALLERS OF CALLERS SUPERCLASSES
+//		for(Method callee: this.Method.CallersofCallersSuperclasses) {
+//			SuperclassCallersofCallers.add(callee.toString()); 
+//			SetPredictionsSetOwners(callee, this, SuperclassCallersofCallersPredictions, SuperclassCallersofCallersOwners); 
+//		}
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		////////////////////////////////////////////////////////////////////////////////////////////
+//		//CALLERS OF CALLERS INTERFACES 
+//		for(Method caller: this.Method.CallersofCallersInterfaces) {
+//			InterfaceCallersofCallers.add(caller.toString()); 
+//			SetPredictionsSetOwners(caller, this, InterfaceCallersofCallersPredictions, InterfaceCallersofCallersOwners); 
+//		}
+		
+		
 		
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,6 +383,7 @@ if(!this.Method.Children.isEmpty()) {
 		for(Method children: this.Method.Children) {
 				if(!children.Callees.isEmpty()) {
 						for(mypackage.Method ChildrenCallee: children.Callees) {
+							
 								ChildrenCallees.add(ChildrenCallee.toString()); 
 								SetPredictionsSetOwners(ChildrenCallee, this, ChildrenCalleesPredictions, ChildrenCalleesOwners); 
 
@@ -300,7 +401,6 @@ if(!this.Method.Children.isEmpty()) {
 //CALLERS OF CALLERS 
 for(Method caller: this.Method.getCallersAugmentedInterfacesSuperclasses(Requirement)) {
 	
-	if(caller.Owner.ID.equals(this.Method.Owner.ID) && AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().equals("E")) {
 		for(mypackage.Method callerofcaller: caller.Callers) {
 			CallersofCallers.add(callerofcaller.toString()); 
 			SetPredictionsSetOwners(callerofcaller, this, CallersofCallersPredictions, CallersofCallersOwners); 
@@ -310,25 +410,30 @@ for(Method caller: this.Method.getCallersAugmentedInterfacesSuperclasses(Require
 			//SUPERCLASS CALLERS OF CALLERS 
 			if(!callerofcaller.Superclasses.isEmpty()) {
 				for(mypackage.Method callerofcallerSuperclass: callerofcaller.Superclasses) {
-					SuperclassCallersofCallers.add(callerofcallerSuperclass.toString());
-					SetPredictionsSetOwners(callerofcallerSuperclass, this, SuperclassCallersofCallersPredictions, SuperclassCallersofCallersOwners); 
+					for(mypackage.Method CallerCallerSuperclass: callerofcallerSuperclass.Callers) {
 
-				
+					SuperclassCallersofCallers.add(CallerCallerSuperclass.toString());
+					SetPredictionsSetOwners(CallerCallerSuperclass, this, SuperclassCallersofCallersPredictions, SuperclassCallersofCallersOwners); 
+
+					}
 					
 				}
 			}
 			//INTERFACE CALLERS OF CALLERS 
 			if(!callerofcaller.Interfaces.isEmpty()) {
 				for(mypackage.Method callerofcallerInterface: callerofcaller.Interfaces) {
-					InterfaceCallersofCallers.add(callerofcallerInterface.toString()); 
-					SetPredictionsSetOwners(callerofcallerInterface, this, InterfaceCallersofCallersPredictions, InterfaceCallersofCallersOwners); 
+					for(mypackage.Method CallerCallerInterface: callerofcallerInterface.Callers) {
+						InterfaceCallersofCallers.add(CallerCallerInterface.toString()); 
+						SetPredictionsSetOwners(CallerCallerInterface, this, InterfaceCallersofCallersPredictions, InterfaceCallersofCallersOwners); 
+					}
+				
 
 				
 					
 				}
 			}
 		}
-	}
+	
 
 	
 	
@@ -337,8 +442,8 @@ for(Method caller: this.Method.getCallersAugmentedInterfacesSuperclasses(Require
 ////////////////////////////////////////////////////////////////////////////////////////////
 //CALLEES OF CALLEES 
 for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requirement)) {
-		if(callee.Owner.ID.equals(this.Method.Owner.ID) && AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction().equals("E")) {
 			for(mypackage.Method calleeofcallee: callee.Callees) {
+//				System.out.println(calleeofcallee.toString());
 					CalleesofCallees.add(calleeofcallee.toString()); 
 					SetPredictionsSetOwners(calleeofcallee, this, CalleesofCalleesPredictions, CalleesofCalleesOwners); 
 
@@ -348,8 +453,11 @@ for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requir
 		//CHILDREN CALLEES OF CALLEES 
 		if(!calleeofcallee.Children.isEmpty()) {
 			for(mypackage.Method calleeofcalleeChildren: calleeofcallee.Superclasses) {
-				ChildrenCalleesofCallees.add(calleeofcalleeChildren.toString()); 
-				SetPredictionsSetOwners(calleeofcalleeChildren, this, ChildrenCalleesofCalleesPredictions, ChildrenCalleesofCalleesOwners); 
+				for(mypackage.Method calleeofcalleeChild: calleeofcalleeChildren.Callees) {
+					ChildrenCalleesofCallees.add(calleeofcalleeChild.toString()); 
+					SetPredictionsSetOwners(calleeofcalleeChild, this, ChildrenCalleesofCalleesPredictions, ChildrenCalleesofCalleesOwners); 
+				}
+				
 
 				
 			}
@@ -357,16 +465,17 @@ for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requir
 		//IMPLEMENTATION CALLEES OF CALLEES 
 		if(!calleeofcallee.Implementations.isEmpty()) {
 			for(mypackage.Method calleeofcalleeImp: calleeofcallee.Implementations) {
-				ImplementationCalleesofCallees.add(calleeofcalleeImp.toString()); 
-				SetPredictionsSetOwners(calleeofcalleeImp, this, ImplementationCalleesofCalleesPredictions, ImplementationCalleesofCalleesOwners); 
-
+				for(mypackage.Method calleeofcalleeImplementation: calleeofcalleeImp.Callees) {
+				ImplementationCalleesofCallees.add(calleeofcalleeImplementation.toString()); 
+				SetPredictionsSetOwners(calleeofcalleeImplementation, this, ImplementationCalleesofCalleesPredictions, ImplementationCalleesofCalleesOwners); 
+				}
 			
 				
 			}
 		}
 		
 	}
-		}
+		
 
 }
 		
@@ -393,6 +502,14 @@ for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requir
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfaceCallersOwners(InterfaceCallersOwners);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfaceCallerPredictions(InterfaceCallersPredictions);
 
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setChildrenCallees(ChildrenCallees);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setChildrenCalleesOwners(ChildrenCalleesOwners);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setChildrenCalleePredictions(ChildrenCalleesPredictions);
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setImplementationCallees(ImplementationCallees);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setImplementationCalleesOwners(ImplementationCalleesOwners);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setImplementationCalleePredictions(ImplementationCalleesPredictions);
 		
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setSuperclassCallers(SuperclassCallers);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setSuperclassCallersOwners(SuperclassCallersOwners);
