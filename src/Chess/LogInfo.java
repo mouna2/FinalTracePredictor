@@ -14,10 +14,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.eclipse.jdt.core.search.MethodNameMatch;
+
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.PredictionValues;
+import Tables.methodcalls;
 import mypackage.ClassTrace2;
 import mypackage.Method;
 import mypackage.MethodTrace;
@@ -531,10 +534,19 @@ public class LogInfo {
 	public static BufferedWriter bwfile2 = null;
 	public static BufferedWriter bwfileChess = null;
 
-	public static BufferedWriter bwfileFP =null; 
-	public static BufferedWriter bwfileFN =null; 
+	
+	public static BufferedWriter bwInterfacesImpChess = null;
+	public static BufferedWriter bwSuperclassesChildrenChess = null;
+	public static BufferedWriter bwInterfacesImpGantt = null;
+	public static BufferedWriter bwSuperclassesChildrenGantt = null;
+	public static BufferedWriter bwInterfacesImpiTrust = null;
+	public static BufferedWriter bwSuperclassesChildreniTrust = null;	
+	public static BufferedWriter bwInterfacesImpJHotDraw = null;
+	public static BufferedWriter bwSuperclassesChildrenJHotDraw = null;
+	
+	
+	
 	public static BufferedWriter bwfile3Chess =null; 
-	public static BufferedWriter bwfile3iTrust =null; 
 	public static BufferedWriter bwfile3jHotDraw =null; 
 
 	
@@ -897,6 +909,16 @@ public class LogInfo {
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 				
+				
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsChess.txt");
+				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
+				bwInterfacesImpChess = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
+				
+				
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenChess.txt");
+				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
+				bwSuperclassesChildrenChess = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
+				
 				System.out.println("yes");
 		}
 
@@ -914,6 +936,16 @@ public class LogInfo {
 				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesGantt.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
+		
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsGantt.txt");
+				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
+				bwInterfacesImpGantt = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
+				
+				
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenGantt.txt");
+				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
+				bwSuperclassesChildrenGantt = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
+		
 		}
 
 		if (ProgramName.equals("itrust")) {
@@ -932,6 +964,15 @@ public class LogInfo {
 			File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesiTrust.txt");
 			FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 			bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
+			
+			File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsiTrust.txt");
+			FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
+			bwInterfacesImpiTrust = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
+			
+			
+			File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust.txt");
+			FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
+			bwSuperclassesChildreniTrust = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 		}
 
 		if (ProgramName.equals("jhotdraw")) {
@@ -951,6 +992,15 @@ public class LogInfo {
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 				
+				
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsJHotDraw.txt");
+				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
+				bwInterfacesImpJHotDraw = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
+				
+				
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw.txt");
+				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
+				bwSuperclassesChildrenJHotDraw = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 		}
 		// bwfile2.newLine();
 		
@@ -1035,6 +1085,7 @@ public class LogInfo {
 		 // Create a new file output stream.
        
 		if (ProgramName.equals("chess")) {
+			
 			LogInfo.bwfileChess.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+ "Gold, TraceClassValue,"
@@ -1056,7 +1107,7 @@ public class LogInfo {
 			LogInfo.bwfileChess.newLine();
 		}
 		if (ProgramName.equals("gantt")) {
-			
+	
 			LogInfo.bwfile2.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+ "Gold, TraceClassValue,"
@@ -1078,6 +1129,8 @@ public class LogInfo {
 			LogInfo.bwfile2.newLine();
 		}
 		if (ProgramName.equals("itrust")) {
+			
+
 			 // Create a new file output stream.
             PrintStream fileOut = new PrintStream("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
             
@@ -1122,6 +1175,7 @@ public class LogInfo {
 			LogInfo.bwfile3.newLine();
 		}
 		if (ProgramName.equals("jhotdraw")) {
+
 			LogInfo.bwfile4.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+ "Gold, TraceClassValue,"
@@ -1143,11 +1197,16 @@ public class LogInfo {
 			LogInfo.bwfile4.newLine();
 		}
 		int count=0; 
+		
+		HashMap<String, List<String>> InterfacesImplementationsHashMap= new HashMap<String, List<String>>(); 
+		HashMap<String, List<String>> SuperclassChildrenHashMap= new HashMap<String, List<String>>(); 
+
 		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 			String reqmethod = methodtrace.Requirement.ID + "-" + methodtrace.Method.ID;
 			
 			LogInfoHashMap.get(reqmethod);
-			
+		
+
 			if (ProgramName.equals("gantt")) {
 				LogInfo.bwfile2.write(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile2.newLine();
@@ -1161,9 +1220,13 @@ public class LogInfo {
 				
 				
 				
+				
 			}
 			if (ProgramName.equals("itrust")) {
 //				System.out.println(LogInfoHashMap.get(reqmethod).toString());
+				
+				//UNCOMMENT THESE TWO LINES BELOW 
+				
 				LogInfo.bwfile3.write(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile3.newLine();
 				
@@ -1182,42 +1245,91 @@ public class LogInfo {
 				
 			}
 		}
-
+		
+		
+		
 		if (ProgramName.equals("chess")) {
+			
 			LogInfo.bwfileChess.close();
-			LogInfo.bwfile3Chess.close();
 		} else if (ProgramName.equals("gantt")) {
+			
 			LogInfo.bwfile2.close();
-			LogInfo.bwfileFP.close();
 			
 
 		} else if (ProgramName.equals("itrust")) {
+		
 			LogInfo.bwfile3.close();
-			LogInfo.bwfile3iTrust.close(); 
 		} else if (ProgramName.equals("jhotdraw")) {
+			
 			LogInfo.bwfile4.close();
-			LogInfo.bwfileFN.close();
-			LogInfo.bwfile3jHotDraw.close();
 
 		}
+	}
+	private static void UpdateInheritanceLogFiles(HashMap<String, List<String>> interfacesImplementationsHashMap, HashMap<String, List<String>> superclassChildrenHashMap, BufferedWriter bwInterfacesImpJHotDraw2, BufferedWriter bwSuperclassesChildrenJHotDraw2) throws IOException {
+		// TODO Auto-generated method stub
+
+		for(String mykey: interfacesImplementationsHashMap.keySet()) {
+			String methname = AlgoFinal.methodtraces2HashMap.get(mykey).Method.methodname.replaceAll("\\,", "/"); 
+			bwInterfacesImpJHotDraw2.write("INTERFACE,"+AlgoFinal.methodtraces2HashMap.get(mykey).Method.ID
+					+","+methname+","+
+					AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.ID
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.classname
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Requirement.ID
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).gold
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).prediction);
+
+			bwInterfacesImpJHotDraw2.newLine();
+			for(String entry: interfacesImplementationsHashMap.get(mykey)) {
+				String methname2 = AlgoFinal.methodtraces2HashMap.get(entry).Method.methodname.replaceAll("\\,", "/"); 
+				bwInterfacesImpJHotDraw2.write("IMPLEMENTATION,"+AlgoFinal.methodtraces2HashMap.get(entry).Method.ID
+								+","+methname2
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.ID
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.classname
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).Requirement.ID
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).gold
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).prediction);
+			
+				bwInterfacesImpJHotDraw2.newLine();
+			}
+		}
+		for(String mykey: superclassChildrenHashMap.keySet()) {
+			String methname = AlgoFinal.methodtraces2HashMap.get(mykey).Method.methodname.replaceAll("\\,", "/"); 
+			bwSuperclassesChildrenJHotDraw2.write("SUPERCLASS,"+AlgoFinal.methodtraces2HashMap.get(mykey).Method.ID
+					+","+methname+","+
+					AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.ID+","+				
+					AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.classname
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Requirement.ID
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).gold
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).prediction);
+
+			bwSuperclassesChildrenJHotDraw2.newLine();
+			for(String entry: superclassChildrenHashMap.get(mykey)) {
+				String methname2 = AlgoFinal.methodtraces2HashMap.get(entry).Method.methodname.replaceAll("\\,", "/"); 
+				bwSuperclassesChildrenJHotDraw2.write("CHILDREN,"+AlgoFinal.methodtraces2HashMap.get(entry).Method.ID
+								+","+methname2+","+						
+								AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.ID+","+	
+								AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.classname
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).Requirement.ID
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).gold
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).prediction);
+			
+				bwSuperclassesChildrenJHotDraw2.newLine();
+			}
+		}
+	
 	}
 	public static void CloseFiles(String ProgramName) throws IOException {
 		// TODO Auto-generated method stub
 		if (ProgramName.equals("chess")) {
 			LogInfo.bwfileChess.close();
-			LogInfo.bwfile3Chess.close();
 		} else if (ProgramName.equals("gantt")) {
 			LogInfo.bwfile2.close();
-			LogInfo.bwfileFP.close();
 			
 
 		} else if (ProgramName.equals("itrust")) {
 			LogInfo.bwfile3.close();
-			LogInfo.bwfile3iTrust.close(); 
 		} else if (ProgramName.equals("jhotdraw")) {
 			LogInfo.bwfile4.close();
-			LogInfo.bwfileFN.close();
-			LogInfo.bwfile3jHotDraw.close();
 
 		}
 	}
@@ -1225,6 +1337,117 @@ public class LogInfo {
 		// TODO Auto-generated method stub
 		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.close(); 
+	}
+	public static void updateInheritanceLogs(String ProgramName, Collection<MethodTrace> MethodTracesHashmapValues,
+			LinkedHashMap<String, LogInfo> LogInfoHashMap) throws IOException {
+		// TODO Auto-generated method stub			
+		 // Create a new file output stream.
+      
+		if (ProgramName.equals("chess")) {
+			LogInfo.bwInterfacesImpChess.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwInterfacesImpChess.newLine();
+			LogInfo.bwSuperclassesChildrenChess.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwSuperclassesChildrenChess.newLine();
+		
+		}
+		if (ProgramName.equals("gantt")) {
+			LogInfo.bwInterfacesImpGantt.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwInterfacesImpGantt.newLine();
+			LogInfo.bwSuperclassesChildrenGantt.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwSuperclassesChildrenGantt.newLine();
+		
+		}
+		if (ProgramName.equals("itrust")) {
+			
+			LogInfo.bwInterfacesImpiTrust.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwInterfacesImpiTrust.newLine();
+			LogInfo.bwSuperclassesChildreniTrust.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwSuperclassesChildreniTrust.newLine();
+
+		}
+		if (ProgramName.equals("jhotdraw")) {
+			LogInfo.bwInterfacesImpJHotDraw.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwInterfacesImpJHotDraw.newLine();
+			LogInfo.bwSuperclassesChildrenJHotDraw.write("Type,MethodID,MethodName,ClassID,ClassName,ReqID,gold,Prediction");
+			LogInfo.bwSuperclassesChildrenJHotDraw.newLine();
+			
+		}
+		int count=0; 
+		
+		HashMap<String, List<String>> InterfacesImplementationsHashMap= new HashMap<String, List<String>>(); 
+		HashMap<String, List<String>> SuperclassChildrenHashMap= new HashMap<String, List<String>>(); 
+
+		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+			String reqmethod = methodtrace.Requirement.ID + "-" + methodtrace.Method.ID;
+			
+			LogInfoHashMap.get(reqmethod);
+			/////////////////////////////////////////////////////////
+			if(!methodtrace.Method.Implementations.isEmpty()) {
+				ArrayList<String> ImpList = new ArrayList<String>(); 
+				for(Method myimp: methodtrace.Method.Implementations) {
+					ImpList.add(methodtrace.Requirement.ID+"-"+myimp.ID); 
+				}
+				InterfacesImplementationsHashMap.put(reqmethod,  ImpList); 
+			}
+			/////////////////////////////////////////////////////////
+
+			if(!methodtrace.Method.Children.isEmpty()) {
+				ArrayList<String> ChildrenList = new ArrayList<String>(); 
+				for(Method mychild: methodtrace.Method.Children) {
+					ChildrenList.add(methodtrace.Requirement.ID+"-"+mychild.ID); 
+				}
+				SuperclassChildrenHashMap.put(reqmethod,  ChildrenList); 
+			}
+			
+		}
+		if (ProgramName.equals("chess")) {
+			
+			
+			UpdateInheritanceLogFiles(InterfacesImplementationsHashMap, SuperclassChildrenHashMap, bwInterfacesImpChess, bwSuperclassesChildrenChess); 
+
+		}
+		
+		
+		
+		if (ProgramName.equals("gantt")) {
+			
+			
+			UpdateInheritanceLogFiles(InterfacesImplementationsHashMap, SuperclassChildrenHashMap, bwInterfacesImpGantt, bwSuperclassesChildrenGantt); 
+
+		}
+		
+		
+		if (ProgramName.equals("itrust")) {			
+			UpdateInheritanceLogFiles(InterfacesImplementationsHashMap, SuperclassChildrenHashMap, bwInterfacesImpiTrust, bwSuperclassesChildreniTrust); 
+}
+		
+		
+		if (ProgramName.equals("jhotdraw")) {
+			
+			UpdateInheritanceLogFiles(InterfacesImplementationsHashMap, SuperclassChildrenHashMap, bwInterfacesImpJHotDraw, bwSuperclassesChildrenJHotDraw); 
+			
+			
+			
+		}
+		
+		
+		if (ProgramName.equals("chess")) {
+			bwInterfacesImpChess.close();
+			bwSuperclassesChildrenChess.close();
+		} else if (ProgramName.equals("gantt")) {
+			bwInterfacesImpGantt.close();
+			bwSuperclassesChildrenGantt.close();
+			
+
+		} else if (ProgramName.equals("itrust")) {
+			bwInterfacesImpiTrust.close();
+			bwSuperclassesChildreniTrust.close();
+		} else if (ProgramName.equals("jhotdraw")) {
+			bwInterfacesImpJHotDraw.close();
+			bwSuperclassesChildrenJHotDraw.close();
+			
+
+		}
 	}
 
 

@@ -22,6 +22,8 @@ public class Method {
 	public boolean CalleeChildFlag= false; 
 	public boolean CallerInterfaceFlag= false; 
 	public boolean CallerSuperclassFlag= false; 
+	MethodList	Excludedcallers=new MethodList(); 
+	MethodList	OuterCallers=new MethodList(); 
 
 	public String methodname;
 	public String fullmethodname;
@@ -620,6 +622,53 @@ public class Method {
 	}
 	
 	
+	public MethodList getOuterCallersFinal(Requirement requirement) {
+//		Excludedcallers=new MethodList(); 
+//		OuterCallers=new MethodList(); 
+
+		return getRecursiveOuterCallers(requirement); 
+	}
+	
+	public MethodList getRecursiveOuterCallers(Requirement requirement) {
+		
+		if(Excludedcallers.contains(this)) {
+			//nothing
+			
+		}
+		else {
+			for(Method caller: this.Callers) {
+				//OUTER CALLER
+				if(!caller.Owner.ID.equals(this.Owner.ID)) {
+					OuterCallers.add(caller); 
+				}
+				//INNER CALLER
+				if(caller.Owner.ID.equals(this.Owner.ID)) {
+					OuterCallers.addAll(caller.getRecursiveOuterCallers(requirement)); 
+				}
+				//CALLER OF INTERFACE 
+				if(!caller.Interfaces.isEmpty()) {
+					for(Method myinterface: caller.Interfaces) {
+						OuterCallers.addAll(myinterface.getRecursiveOuterCallers(requirement)); 
+
+					}
+
+				}
+				//CALLER OF SUPERCLASS 
+				if(!caller.Superclasses.isEmpty()) {
+					for(Method mysuperclass: caller.Superclasses) {
+						OuterCallers.addAll(mysuperclass.getRecursiveOuterCallers(requirement)); 
+
+					}
+
+				}
+			}
+		}
+		
+		
+		
+		return OuterCallers; 
+
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////
