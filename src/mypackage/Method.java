@@ -633,7 +633,7 @@ public class Method {
 		
 		if(Excludedcallers.contains(this)) {
 			//nothing
-			
+			return null; 
 		}
 		else {
 			for(Method caller: this.Callers) {

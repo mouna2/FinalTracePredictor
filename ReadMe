@@ -1,0 +1,21 @@
+SELECT callermethodid, callername, callerclass, callerclassid, fullcaller, calleemethodid, calleename, calleeclass, 
+calleeclassid, fullcallee,  count( * )  FROM databasejhotdraw.methodcalls GROUP BY 
+callermethodid, callername, callerclass, callerclassid, fullcaller, calleemethodid, 
+calleename, calleeclass, calleeclassid, fullcallee HAVING count( * ) >1
+
+
+
+
+DELETE a FROM databaseitrust.methodcalls a
+  INNER JOIN databaseitrust.methodcalls a2
+WHERE a.id < a2.id
+AND   a.callermethodid=a2.callermethodid
+AND   a.callername=a2.callername
+AND a.callerclass=a2.callerclass
+AND a.callerclassid=a2.callerclassid
+AND a.fullcaller=a2.fullcaller
+AND   a.calleemethodid=a2.calleemethodid
+AND   a.calleename=a2.calleename
+AND a.calleeclass=a2.calleeclass
+AND a.calleeclassid=a2.calleeclassid
+AND a.fullcallee=a2.fullcallee; 
