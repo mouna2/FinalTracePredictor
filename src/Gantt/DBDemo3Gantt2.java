@@ -36,6 +36,7 @@ import Tables.tracesmethods;
 
 import spoon.Launcher;
 import spoon.SpoonAPI;
+import spoon.SpoonException;
 import spoon.reflect.CtModel;
 import spoon.reflect.code.CtAssignment;
 import spoon.reflect.code.CtBlock;
@@ -991,6 +992,17 @@ public class DBDemo3Gantt2 {
         	    		if(consInvocation instanceof CtConstructorCall ) {
         	    			InvokedMethodNameBEFORE=TransformConstructorIntoInit(InvokedMethodNameBEFORE); 
         	    			 InvokedMethodNamePackageFree=KeepOnlyMethodName(InvokedMethodNameBEFORE); 
+        	    		}
+        	    		
+        	    		try {
+        	    			if(consInvocation.toString().startsWith("super(")  || consInvocation.toString().startsWith("this(")) {
+            	    			InvokedMethodNameBEFORE=TransformConstructorIntoInit(InvokedMethodNameBEFORE); 
+           	    			 InvokedMethodNamePackageFree=KeepOnlyMethodName(InvokedMethodNameBEFORE); 
+            
+            	    		}
+        	    		}
+        	    		catch(SpoonException e) {
+        	    			System.out.println(e);
         	    		}
 //        	    		if(consInvocation.toString().contains("super")  ) {
 //    	    			InvokedMethodNameBEFORE=TransformConstructorIntoInit(InvokedMethodNameBEFORE); 
