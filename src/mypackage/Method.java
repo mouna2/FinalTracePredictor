@@ -648,22 +648,21 @@ public class Method {
 		else {
 			for(Method caller: this.Callers) {
 				//OUTER CALLER
+//				if(!Excludedcallers.contains(this)) {
+
 				if(!caller.Owner.ID.equals(this.Owner.ID)) {
-					if(!Excludedcallers.contains(this)) {
 						Excludedcallers.add(this); 
-					}
-					if(!OuterCallers.contains(caller)) {
 						OuterCallers.add(caller); 
 
-					}
+					
+					
 				}
 				//INNER CALLER
 				if(caller.Owner.ID.equals(this.Owner.ID) ) {
-					if(!Excludedcallers.contains(this)) {
 						Excludedcallers.add(this); 
 						OuterCallers.addAll(caller.getRecursiveOuterCallers(requirement)); 
 
-					}
+					
 					
 					
 				}
@@ -671,11 +670,19 @@ public class Method {
 				if(!caller.Interfaces.isEmpty()) {
 					for(Method myinterface: this.Interfaces) {
 						for(Method myinterfaceCaller: myinterface.Callers) {
-							if(!Excludedcallers.contains(this)) {
-								Excludedcallers.add(this); 
+							if(!myinterfaceCaller.Owner.ID.equals(this.Owner.ID)) {
+								OuterCallers.add(myinterfaceCaller); 
+								System.out.println(myinterfaceCaller);
+								Excludedcallers.add(myinterfaceCaller); 
+							}
+							else {
 								OuterCallers.addAll(myinterfaceCaller.getRecursiveOuterCallers(requirement)); 
 
+								Excludedcallers.add(myinterfaceCaller); 
+
 							}
+
+							
 						}
 						
 					
@@ -687,17 +694,26 @@ public class Method {
 					for(Method mysuperclass: this.Superclasses) {
 						
 						for(Method mysuperclassCaller: mysuperclass.Callers) {
-							if(!Excludedcallers.contains(this)) {
-								Excludedcallers.add(this); 
+							if(!mysuperclassCaller.Owner.ID.equals(this.Owner.ID)) {
+								OuterCallers.add(mysuperclassCaller); 
+								System.out.println(mysuperclassCaller);
+								Excludedcallers.add(mysuperclassCaller); 
+							}
+							else {
 								OuterCallers.addAll(mysuperclassCaller.getRecursiveOuterCallers(requirement)); 
 
+								Excludedcallers.add(mysuperclassCaller); 
+
 							}
+
+							
+						}
 						}
 						
 
 					}
 
-				}
+//				}
 			}
 			
 			
@@ -713,7 +729,7 @@ public class Method {
 	}
 	
 	
-	
+	/////////////////////////////////////////////////////////////////////////
 	public MethodList getOuterCalleesFinal(Requirement requirement) {
 		Excludedcallees=new MethodList(); 
 		OuterCallees=new MethodList(); 
@@ -725,31 +741,29 @@ public class Method {
 		
 		String ReqMethod= requirement.ID+"-"+this.ID; 
 		
-		System.out.println(requirement.ID+"-"+this.ID);
+//		System.out.println(requirement.ID+"-"+this.ID);
 
 		if(Excludedcallees.contains(this)) {
-			System.out.println("yes");
+//			System.out.println("yes");
 //			return null; 
 		}
 		else {
 			for(Method callee: this.Callees) {
 				//OUTER Callee
+//				if(!Excludedcallees.contains(this)) {
 				if(!callee.Owner.ID.equals(this.Owner.ID)) {
-					if(!Excludedcallees.contains(this)) {
+					
 						Excludedcallees.add(this); 
-					}
-					if(!OuterCallees.contains(callee)) {
 						OuterCallees.add(callee); 
 
 					}
-				}
+				
+				
 				//INNER Callee
 				if(callee.Owner.ID.equals(this.Owner.ID) ) {
-					if(!Excludedcallees.contains(this)) {
 						Excludedcallees.add(this); 
 						OuterCallees.addAll(callee.getRecursiveOuterCallees(requirement)); 
-
-					}
+					
 					
 					
 				}
@@ -757,12 +771,19 @@ public class Method {
 				if(!callee.Implementations.isEmpty()) {
 					for(Method myimplementation: callee.Implementations) {
 						for(Method myimplementationCallee: myimplementation.Callees) {
-							if(!Excludedcallees.contains(this)) {
-								Excludedcallees.add(this); 
-								OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
+								if(!myimplementationCallee.Owner.ID.equals(this.Owner.ID)) {
+									OuterCallees.add(myimplementationCallee); 
+									System.out.println(myimplementationCallee);
+									Excludedcallees.add(myimplementationCallee); 
+								}
+								else {
+									OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
 
+									Excludedcallees.add(myimplementationCallee); 
+
+								}
 							}
-						}
+						
 						
 					
 					}
@@ -772,16 +793,21 @@ public class Method {
 				if(!callee.Children.isEmpty()) {
 					for(Method mychild: callee.Children) {
 						for(Method myimplementationCallee: mychild.Callees) {
-						if(!Excludedcallees.contains(this)) {
-							Excludedcallees.add(this); 
-							OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
+							if(!myimplementationCallee.Owner.ID.equals(this.Owner.ID)) {
+								OuterCallees.add(myimplementationCallee); 
+								System.out.println(myimplementationCallee.getRecursiveOuterCallees(requirement));
+								Excludedcallees.add(myimplementationCallee); 
+							}else {
+								OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
+								Excludedcallees.add(myimplementationCallee); 
+							}
 
 						}
 						}
 
 					}
 
-				}
+//				}
 			}
 			
 			

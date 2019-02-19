@@ -504,6 +504,18 @@ SetPredictionsSetOwners(callee, this, OuterCalleesFinalPredictions, OuterCallees
 
 
 }	
+
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersFinal(OuterCallersFinal);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersPredictionsFinal(OuterCallersFinalPredictions);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersOwnersFinal(OuterCallersFinalOwners);
+		
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesFinal(OuterCalleesFinal);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesPredictionsFinal(OuterCalleesFinalPredictions);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesOwnersFinal(OuterCalleesFinalOwners);
+
+
+
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallers(Callers);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersOwners(CallersOwners);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersPredictions(CallersPredictions);
@@ -513,14 +525,7 @@ SetPredictionsSetOwners(callee, this, OuterCalleesFinalPredictions, OuterCallees
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersOwners(CallersofCallersOwners);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersPredictions(CallersofCallersPredictions);
 		
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersFinal(OuterCallersFinal);
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersPredictionsFinal(OuterCallersFinalPredictions);
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersOwnersFinal(OuterCallersFinalOwners);
 
-		
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesFinal(OuterCalleesFinal);
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesPredictionsFinal(OuterCalleesFinalPredictions);
-		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesOwnersFinal(OuterCalleesFinalOwners);
 		
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallers(CallersofCallers);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersOwners(CallersofCallersOwners);
