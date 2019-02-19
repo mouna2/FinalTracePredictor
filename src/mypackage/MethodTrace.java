@@ -182,7 +182,10 @@ public final class MethodTrace {
 		List<String> SuperclassCallersofCallers= new ArrayList<String>(); 
 		List<String> SuperclassCallersofCallersPredictions= new ArrayList<String>(); 
 		List<String> SuperclassCallersofCallersOwners= new ArrayList<String>(); 
-		
+		List<String> OuterCallersFinal= new ArrayList<String>(); 
+		List<String> OuterCallersFinalPredictions= new ArrayList<String>(); 
+		List<String> OuterCallersFinalOwners= new ArrayList<String>(); 
+
 		
 		List<String> Callees= new ArrayList<String>(); 
 		List<String> CalleesPredictions= new ArrayList<String>(); 
@@ -202,8 +205,10 @@ public final class MethodTrace {
 		List<String> ChildrenCalleesofCallees= new ArrayList<String>(); 
 		List<String> ChildrenCalleesofCalleesPredictions= new ArrayList<String>(); 
 		List<String> ChildrenCalleesofCalleesOwners= new ArrayList<String>(); 
-		
-		
+		List<String> OuterCalleesFinal= new ArrayList<String>(); 
+		List<String> OuterCalleesFinalPredictions= new ArrayList<String>(); 
+		List<String> OuterCalleesFinalOwners= new ArrayList<String>(); 
+
 		
 		
 		String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
@@ -305,6 +310,8 @@ public final class MethodTrace {
 		
 		
 		
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		//CALLERS 
@@ -478,11 +485,42 @@ for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requir
 		
 
 }
-		
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//FINAL CALLERS 
+for(Method caller: this.Method.getOuterCallersFinal(Requirement)) {
+OuterCallersFinal.add(caller.toString()); 
+SetPredictionsSetOwners(caller, this, OuterCallersFinalPredictions, OuterCallersFinalOwners); 
+
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//FINAL CALLEES
+for(Method callee: this.Method.getOuterCalleesFinal(Requirement)) {
+OuterCalleesFinal.add(callee.toString()); 
+SetPredictionsSetOwners(callee, this, OuterCalleesFinalPredictions, OuterCalleesFinalOwners); 
+
+
+
+}	
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallers(Callers);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersOwners(CallersOwners);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersPredictions(CallersPredictions);
 
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallers(CallersofCallers);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersOwners(CallersofCallersOwners);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersPredictions(CallersofCallersPredictions);
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersFinal(OuterCallersFinal);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersPredictionsFinal(OuterCallersFinalPredictions);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersOwnersFinal(OuterCallersFinalOwners);
+
+		
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesFinal(OuterCalleesFinal);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesPredictionsFinal(OuterCalleesFinalPredictions);
+		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCalleesOwnersFinal(OuterCalleesFinalOwners);
 		
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallers(CallersofCallers);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCallersCallersOwners(CallersofCallersOwners);

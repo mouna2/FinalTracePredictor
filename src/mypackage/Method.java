@@ -15,6 +15,8 @@ import mypackage.*;
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
+
+import java.awt.Component;
 public class Method {
 	public String ID; 
 	public boolean NewPatternFlag= false; 
@@ -22,8 +24,11 @@ public class Method {
 	public boolean CalleeChildFlag= false; 
 	public boolean CallerInterfaceFlag= false; 
 	public boolean CallerSuperclassFlag= false; 
-	MethodList	Excludedcallers=new MethodList(); 
-	MethodList	OuterCallers=new MethodList(); 
+	static MethodList	Excludedcallers=new MethodList(); 
+	static MethodList OuterCallers=new MethodList(); 
+	static MethodList	Excludedcallees=new MethodList(); 
+	static MethodList OuterCallees=new MethodList(); 
+	Method meth =null; 
 
 	public String methodname;
 	public String fullmethodname;
@@ -43,7 +48,8 @@ public class Method {
 	public MethodList Interfaces= new MethodList(); 
 	public MethodList Implementations= new MethodList(); 
 	public MethodList Superclasses= new MethodList(); 
-	public MethodList Children= new MethodList(); 
+	public MethodList Children= new MethodList();
+	
 	//	public List<RequirementGold> requirementsGold= new ArrayList<RequirementGold>(); 
 	//	public List<Requirement2> requirements= new ArrayList<Requirement2>(); 
 	//	public	HashMap<Requirement2, String> FinalMethodHashMap= new HashMap<Requirement2, String>(); 
@@ -623,52 +629,173 @@ public class Method {
 	
 	
 	public MethodList getOuterCallersFinal(Requirement requirement) {
-//		Excludedcallers=new MethodList(); 
-//		OuterCallers=new MethodList(); 
+		Excludedcallers=new MethodList(); 
+		OuterCallers=new MethodList(); 
 
 		return getRecursiveOuterCallers(requirement); 
 	}
 	
 	public MethodList getRecursiveOuterCallers(Requirement requirement) {
 		
+		String ReqMethod= requirement.ID+"-"+this.ID; 
+		
+		System.out.println(requirement.ID+"-"+this.ID);
+
 		if(Excludedcallers.contains(this)) {
-			//nothing
-			return null; 
+			System.out.println("yes");
+//			return null; 
 		}
 		else {
 			for(Method caller: this.Callers) {
 				//OUTER CALLER
 				if(!caller.Owner.ID.equals(this.Owner.ID)) {
-					OuterCallers.add(caller); 
+					if(!Excludedcallers.contains(this)) {
+						Excludedcallers.add(this); 
+					}
+					if(!OuterCallers.contains(caller)) {
+						OuterCallers.add(caller); 
+
+					}
 				}
 				//INNER CALLER
-				if(caller.Owner.ID.equals(this.Owner.ID)) {
-					OuterCallers.addAll(caller.getRecursiveOuterCallers(requirement)); 
+				if(caller.Owner.ID.equals(this.Owner.ID) ) {
+					if(!Excludedcallers.contains(this)) {
+						Excludedcallers.add(this); 
+						OuterCallers.addAll(caller.getRecursiveOuterCallers(requirement)); 
+
+					}
+					
+					
 				}
 				//CALLER OF INTERFACE 
 				if(!caller.Interfaces.isEmpty()) {
-					for(Method myinterface: caller.Interfaces) {
-						OuterCallers.addAll(myinterface.getRecursiveOuterCallers(requirement)); 
+					for(Method myinterface: this.Interfaces) {
+						for(Method myinterfaceCaller: myinterface.Callers) {
+							if(!Excludedcallers.contains(this)) {
+								Excludedcallers.add(this); 
+								OuterCallers.addAll(myinterfaceCaller.getRecursiveOuterCallers(requirement)); 
 
+							}
+						}
+						
+					
 					}
 
 				}
 				//CALLER OF SUPERCLASS 
 				if(!caller.Superclasses.isEmpty()) {
-					for(Method mysuperclass: caller.Superclasses) {
-						OuterCallers.addAll(mysuperclass.getRecursiveOuterCallers(requirement)); 
+					for(Method mysuperclass: this.Superclasses) {
+						
+						for(Method mysuperclassCaller: mysuperclass.Callers) {
+							if(!Excludedcallers.contains(this)) {
+								Excludedcallers.add(this); 
+								OuterCallers.addAll(mysuperclassCaller.getRecursiveOuterCallers(requirement)); 
+
+							}
+						}
+						
 
 					}
 
 				}
 			}
+			
+			
+			//END FOR 
+			
+	
 		}
 		
 		
-		
-		return OuterCallers; 
+		MethodList OuterCallers2 = RemoveDuplicates(OuterCallers); 
+		return OuterCallers2; 
 
 	}
+	
+	
+	
+	public MethodList getOuterCalleesFinal(Requirement requirement) {
+		Excludedcallees=new MethodList(); 
+		OuterCallees=new MethodList(); 
+
+		return getRecursiveOuterCallees(requirement); 
+	}
+	
+	public MethodList getRecursiveOuterCallees(Requirement requirement) {
+		
+		String ReqMethod= requirement.ID+"-"+this.ID; 
+		
+		System.out.println(requirement.ID+"-"+this.ID);
+
+		if(Excludedcallees.contains(this)) {
+			System.out.println("yes");
+//			return null; 
+		}
+		else {
+			for(Method callee: this.Callees) {
+				//OUTER Callee
+				if(!callee.Owner.ID.equals(this.Owner.ID)) {
+					if(!Excludedcallees.contains(this)) {
+						Excludedcallees.add(this); 
+					}
+					if(!OuterCallees.contains(callee)) {
+						OuterCallees.add(callee); 
+
+					}
+				}
+				//INNER Callee
+				if(callee.Owner.ID.equals(this.Owner.ID) ) {
+					if(!Excludedcallees.contains(this)) {
+						Excludedcallees.add(this); 
+						OuterCallees.addAll(callee.getRecursiveOuterCallees(requirement)); 
+
+					}
+					
+					
+				}
+				//Callee OF INTERFACE 
+				if(!callee.Implementations.isEmpty()) {
+					for(Method myimplementation: callee.Implementations) {
+						for(Method myimplementationCallee: myimplementation.Callees) {
+							if(!Excludedcallees.contains(this)) {
+								Excludedcallees.add(this); 
+								OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
+
+							}
+						}
+						
+					
+					}
+
+				}
+				//Callee OF SUPERCLASS 
+				if(!callee.Children.isEmpty()) {
+					for(Method mychild: callee.Children) {
+						for(Method myimplementationCallee: mychild.Callees) {
+						if(!Excludedcallees.contains(this)) {
+							Excludedcallees.add(this); 
+							OuterCallees.addAll(myimplementationCallee.getRecursiveOuterCallees(requirement)); 
+
+						}
+						}
+
+					}
+
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		
+//		System.out.println(OuterCallees);
+		MethodList OuterCallees2=RemoveDuplicates(OuterCallees); 
+		return OuterCallees2; 
+
+	}
+	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////

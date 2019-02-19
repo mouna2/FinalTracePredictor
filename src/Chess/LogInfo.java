@@ -99,6 +99,51 @@ public class LogInfo {
 	List<String> ChildrenCalleesCalleesPredictions; 
 	List<String> ChildrenCalleesCalleesOwners; 
 	
+	
+	List<String> OuterCallersFinal; 
+	List<String> OuterCallersPredictionsFinal; 
+	List<String> OuterCallersOwnersFinal; 
+	
+	List<String> OuterCalleesFinal; 
+	List<String> OuterCalleesPredictionsFinal; 
+	List<String> OuterCalleesOwnersFinal; 
+	
+	public List<String> getOuterCallersFinal() {
+		return OuterCallersFinal;
+	}
+	public void setOuterCallersFinal(List<String> outerCallersFinal) {
+		OuterCallersFinal = outerCallersFinal;
+	}
+	public List<String> getOuterCallersPredictionsFinal() {
+		return OuterCallersPredictionsFinal;
+	}
+	public void setOuterCallersPredictionsFinal(List<String> outerCallersPredictionsFinal) {
+		OuterCallersPredictionsFinal = outerCallersPredictionsFinal;
+	}
+	public List<String> getOuterCallersOwnersFinal() {
+		return OuterCallersOwnersFinal;
+	}
+	public void setOuterCallersOwnersFinal(List<String> outerCallersOwnersFinal) {
+		OuterCallersOwnersFinal = outerCallersOwnersFinal;
+	}
+	public List<String> getOuterCalleesFinal() {
+		return OuterCalleesFinal;
+	}
+	public void setOuterCalleesFinal(List<String> outerCalleesFinal) {
+		OuterCalleesFinal = outerCalleesFinal;
+	}
+	public List<String> getOuterCalleesPredictionsFinal() {
+		return OuterCalleesPredictionsFinal;
+	}
+	public void setOuterCalleesPredictionsFinal(List<String> outerCalleesPredictionsFinal) {
+		OuterCalleesPredictionsFinal = outerCalleesPredictionsFinal;
+	}
+	public List<String> getOuterCalleesOwnersFinal() {
+		return OuterCalleesOwnersFinal;
+	}
+	public void setOuterCalleesOwnersFinal(List<String> outerCalleesOwnersFinal) {
+		OuterCalleesOwnersFinal = outerCalleesOwnersFinal;
+	}
 	public List<String> getCallersPredictions() {
 		return CallersPredictions;
 	}
@@ -732,6 +777,14 @@ public class LogInfo {
 		String ImplementationCalleesCalleesOwnerList=toString3(ImplementationCalleesCalleesOwners); 
 		String ImplementationCalleesCalleesPredictionList=toString3(ImplementationCalleesCalleesPredictions); 
 		
+		String OuterCallersFinalList=toString3(OuterCallersFinal); 
+		String OuterCallersFinalOwnersList=toString3(OuterCallersOwnersFinal); 
+		String OuterCallersFinalPredictionsList=toString3(OuterCallersPredictionsFinal); 
+		
+		String OuterCalleesFinalList=toString3(OuterCalleesFinal); 
+		String OuterCalleesFinalOwnersList=toString3(OuterCalleesOwnersFinal); 
+		String OuterCalleesFinalPredictionsList=toString3(OuterCalleesPredictionsFinal); 
+		
 		String reqClass= RequirementID+"-"+ClassID; 
 		
 		
@@ -752,7 +805,11 @@ public class LogInfo {
 				+","+CalleesCalleesList+","+CalleesCalleesPredictionsList+","+CalleesCalleesOwnersList
 				+","+ImplementationCalleesCalleesList+","+ImplementationCalleesCalleesPredictionList+","+ImplementationCalleesCalleesOwnerList
 				+","+ChildrenCalleesCalleesList+","+ChildrenCalleesCalleesPredictionList+","+ChildrenCalleesCalleesOwnerList
-		+","+PrecisionRecall	
+				//TWO FOLLOWING LINES CAN BE REMOVED 
+				+","+OuterCallersFinalList+","+OuterCallersFinalPredictionsList+","+OuterCallersFinalOwnersList
+				+","+OuterCalleesFinalList+","+OuterCalleesFinalPredictionsList+","+OuterCalleesFinalOwnersList
+
+				+","+PrecisionRecall	
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
 //				PrecisionRecall	+","+toString2(IterationValues)+","+TraceValue+"-"+Reason+"-" +PrecisionRecall;
@@ -1102,6 +1159,8 @@ public class LogInfo {
 					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
 					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
 					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
+					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfileChess.newLine();
@@ -1124,6 +1183,8 @@ public class LogInfo {
 					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
 					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
 					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
+					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile2.newLine();
@@ -1170,6 +1231,8 @@ public class LogInfo {
 					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
 					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
 					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
+					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile3.newLine();
@@ -1192,6 +1255,11 @@ public class LogInfo {
 					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
 					+" ImplementationCalleesCallees, ImplementationCalleesCalleesPredictions, ImplementationCalleesCalleesOwnerValues,"
 					+" ChildrenCalleesCallees, ChildrenCalleesCalleesPredictions, ChildrenCalleesCalleesOwnerValues,"
+					
+					//THESE TWO LINES CAN BE REMOVED 
+					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
+					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
+					//END OF THESE TWO LINES CAN BE REMOVED 
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile4.newLine();
