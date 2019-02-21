@@ -171,4 +171,18 @@ public String toString() {
 return res; 
 } 
 
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+public OwnerClassList remove(Clazz c) {
+	OwnerClassList FinalList= new OwnerClassList();
+	for(Clazz ownerclass: this) {
+		if(!ownerclass.equals(c)) {
+			FinalList.add(ownerclass); 
+		}
+		
+	}
+	return FinalList; 
+}
+
 }
