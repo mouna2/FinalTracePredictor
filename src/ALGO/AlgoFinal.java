@@ -53,6 +53,7 @@ import mypackage.ClassTrace2;
 import mypackage.ColumnGroup;
 import mypackage.Method;
 import mypackage.MethodTrace;
+import mypackage.Requirement;
 
 
 public class AlgoFinal extends JFrame {
@@ -1368,6 +1369,18 @@ public class AlgoFinal extends JFrame {
 			bwfile3.close();
 		}
 	
+		
+		for( String meth:DatabaseInput.MethodHashMap.keySet()) {
+			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getCallees(new Requirement("1", "R0"))) {
+				System.out.print("METHOD "+DatabaseInput.MethodHashMap.get(meth).getClassrep().classname+"."+DatabaseInput.MethodHashMap.get(meth).methodname+"---");
+				System.out.println(callee.getClassrep().classname+"."+callee.methodname);
+
+			}
+			
+
+		}
+		
+		
 		System.out.println("RemainingpredictionValues"+RemainingpredictionValues);
 		System.out.println("OWNERRRRRRRRRR");
 		LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, RemainingPattern, ProgramName, RemainingpredictionValues, LogInfoHashMap);

@@ -17,11 +17,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
 import java.awt.Component;
-public class Method {
-	 boolean FirstTimeCallers=false; 
-	 boolean FirstTimeCallees=false; 
-
-	
+public class Method2 {
 	public String ID; 
 	public boolean NewPatternFlag= false; 
 	public boolean CalleeImplementationFlag= false; 
@@ -30,11 +26,8 @@ public class Method {
 	public boolean CallerSuperclassFlag= false; 
 	static MethodList OuterCallers=new MethodList();
 	static MethodList OuterCallees=new MethodList();
-	Method meth =null; 
-	public  MethodList NewCallees=new MethodList();
-	public  MethodList NewCallers=new MethodList();
-	public  MethodList NewCallees2=new MethodList();
-	public  MethodList NewCallers2=new MethodList();
+	Method2 meth =null; 
+	public  MethodList NewCallees=null; 
 	public String methodname;
 	public String fullmethodname;
 	public Clazz Owner= new Clazz(); 
@@ -156,12 +149,12 @@ public class Method {
 	public void setImplementations(MethodList implementations) {
 		this.Implementations = implementations;
 	}
-	public Method(String methodid, String methodname) {
+	public Method2(String methodid, String methodname) {
 		super();
 		this.ID = methodid;
 		this.methodname = methodname;
 	}
-	public Method() {
+	public Method2() {
 		// TODO Auto-generated constructor stub
 	}
 	public String getMethodid() {
@@ -192,16 +185,16 @@ public class Method {
 		return "["+  ID + ": methodname=" + methodname  + ": classname=" + Owner.classname + ": classid=" + Owner.ID +"]";
 	}
 
-	public String PrintList(List<Method> methods) {
+	public String PrintList(List<Method2> methods) {
 		String s =""; 
-		for(Method mymethod: methods) {
+		for(Method2 mymethod: methods) {
 			s= s +mymethod.toString(); 
 		}
 		return s; 
 	}
 
 
-	public Method(String methodid, String methodname, String fullmethodname,
+	public Method2(String methodid, String methodname, String fullmethodname,
 			Clazz classrep, HashMap<Requirement, String> finalMethodHashMap) {
 		super();
 		this.ID = methodid;
@@ -212,7 +205,7 @@ public class Method {
 
 
 
-	public Method(String methodid, String methodname, String fullmethodname,
+	public Method2(String methodid, String methodname, String fullmethodname,
 			Clazz classrep) {
 		super();
 		this.ID = methodid;
@@ -326,113 +319,13 @@ public class Method {
 	////////////////////////////// VERSION 3 SMART FILTERING///////////////////////	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
-//
-//	public MethodList getExtendedCallees(Requirement requirement) {
-//		MethodList NewCallees= new MethodList();
-//		NewCallees.addAll(Callees);
-//
-//		if(!this.Implementations.isEmpty()) {
-//			for(Method imp: this.Implementations) {
-//
-//				if(!imp.Callees.isEmpty()) {
-//					NewCallees=NewCallees.AddAll(imp.Callees); 
-//				}
-//
-//
-//			}
-//
-//
-//		}
-//
-//		if(!this.Children.isEmpty()) {
-//
-//
-//			for(Method child: this.Children) {
-//				if(!child.Callees.isEmpty()) {
-//					NewCallees=	NewCallees.AddAll(child.Callees); 
-//
-//				}
-//
-//
-//			}
-//		}
-//
-//		MethodList FinalCallees = new MethodList();
-//
-//		for(Method Callee: NewCallees) {
-//			if(
-////					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("T") ||
-//					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("N")) {
-//				FinalCallees.add(Callee); 
-//			}
-//			else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("E") ) {
-//				if(!Callee.Owner.ID.equals(this.Owner.ID)){
-//					FinalCallees.add(Callee); 
-//				}else {
-//						if(!Callee.Callees.isEmpty()) {
-//							FinalCallees.addAll(Callee.Callees); 
-////							for(Method mycallee:Callee.Callees) {
-////								if(!mycallee.Interfaces.isEmpty()) {
-////									for(Method inter: mycallee.Interfaces) {
-////										if(!inter.Callees.isEmpty()) {
-////
-////
-////											FinalCallees=FinalCallees.AddAll(inter.Callees); 
-////
-////										}
-////									}
-////								}
-////
-////								if(!mycallee.Superclasses.isEmpty()) {
-////									for(Method superclass: mycallee.Superclasses) {
-////										if(!superclass.Callees.isEmpty()) {
-////
-////											FinalCallees=FinalCallees.AddAll(superclass.Callees); 
-////
-////										}
-////									}
-////								}
-////							}
-//						
-//						}else {
-//							FinalCallees.add(Callee); 
-//						}
-////					for(Method CalleeOfCallee: Callee.Callees) {
-////						for(Method CalleeOfCallee: Callee.getCallees(requirement)) {
-////							FinalCallees.add(CalleeOfCallee);
-////						if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("T") 
-////								||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("N")) {
-////							FinalCallees.add(CalleeOfCallee); 
-////						}
-////						else if(!CalleeOfCallee.Owner.ID.equals(Callee.Owner.ID)
-////								&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("E")){
-////							FinalCallees.add(CalleeOfCallee); 
-////						}
-////						
-////					}
-//				}
-//			}
-//		}
-//		
-//		FinalCallees=RemoveDuplicates(FinalCallees); 
-//		return FinalCallees; 
-//	}
-//	
-	
-	/////////////////////////////////////////////////////////
 
-	/////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////
-
-	/////////////////////////////////////////////////////////
-	
-	
-	public MethodList getCalleesAugmentedChildrenImplementations(Requirement requirement) {
+	public MethodList getExtendedCallees(Requirement requirement) {
 		MethodList NewCallees= new MethodList();
 		NewCallees.addAll(Callees);
 
 		if(!this.Implementations.isEmpty()) {
-			for(Method imp: this.Implementations) {
+			for(Method2 imp: this.Implementations) {
 
 				if(!imp.Callees.isEmpty()) {
 					NewCallees=NewCallees.AddAll(imp.Callees); 
@@ -447,7 +340,107 @@ public class Method {
 		if(!this.Children.isEmpty()) {
 
 
-			for(Method child: this.Children) {
+			for(Method2 child: this.Children) {
+				if(!child.Callees.isEmpty()) {
+					NewCallees=	NewCallees.AddAll(child.Callees); 
+
+				}
+
+
+			}
+		}
+
+		MethodList FinalCallees = new MethodList();
+
+		for(Method2 Callee: NewCallees) {
+			if(
+//					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("T") ||
+					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("N")) {
+				FinalCallees.add(Callee); 
+			}
+			else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("E") ) {
+				if(!Callee.Owner.ID.equals(this.Owner.ID)){
+					FinalCallees.add(Callee); 
+				}else {
+						if(!Callee.Callees.isEmpty()) {
+							FinalCallees.addAll(Callee.Callees); 
+//							for(Method mycallee:Callee.Callees) {
+//								if(!mycallee.Interfaces.isEmpty()) {
+//									for(Method inter: mycallee.Interfaces) {
+//										if(!inter.Callees.isEmpty()) {
+//
+//
+//											FinalCallees=FinalCallees.AddAll(inter.Callees); 
+//
+//										}
+//									}
+//								}
+//
+//								if(!mycallee.Superclasses.isEmpty()) {
+//									for(Method superclass: mycallee.Superclasses) {
+//										if(!superclass.Callees.isEmpty()) {
+//
+//											FinalCallees=FinalCallees.AddAll(superclass.Callees); 
+//
+//										}
+//									}
+//								}
+//							}
+						
+						}else {
+							FinalCallees.add(Callee); 
+						}
+//					for(Method CalleeOfCallee: Callee.Callees) {
+//						for(Method CalleeOfCallee: Callee.getCallees(requirement)) {
+//							FinalCallees.add(CalleeOfCallee);
+//						if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("T") 
+//								||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("N")) {
+//							FinalCallees.add(CalleeOfCallee); 
+//						}
+//						else if(!CalleeOfCallee.Owner.ID.equals(Callee.Owner.ID)
+//								&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CalleeOfCallee.ID).prediction.equals("E")){
+//							FinalCallees.add(CalleeOfCallee); 
+//						}
+//						
+//					}
+				}
+			}
+		}
+		
+		FinalCallees=RemoveDuplicates(FinalCallees); 
+		return FinalCallees; 
+	}
+	
+	
+	/////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////
+	
+	
+	public MethodList getCalleesAugmentedChildrenImplementations(Requirement requirement) {
+		MethodList NewCallees= new MethodList();
+		NewCallees.addAll(Callees);
+
+		if(!this.Implementations.isEmpty()) {
+			for(Method2 imp: this.Implementations) {
+
+				if(!imp.Callees.isEmpty()) {
+					NewCallees=NewCallees.AddAll(imp.Callees); 
+				}
+
+
+			}
+
+
+		}
+
+		if(!this.Children.isEmpty()) {
+
+
+			for(Method2 child: this.Children) {
 				if(!child.Callees.isEmpty()) {
 					NewCallees=	NewCallees.AddAll(child.Callees); 
 
@@ -539,99 +532,99 @@ public class Method {
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
-//	public MethodList getExtendedCallers(Requirement requirement) {
+	public MethodList getExtendedCallers(Requirement requirement) {
+		
+		MethodList NewCallers= new MethodList();
+		NewCallers.addAll(Callers);
+		MethodList FinalCallers = new MethodList();
+		
+			if(!this.Interfaces.isEmpty()) {
+				for(Method2 inter: this.Interfaces) {
+					if(!inter.Callers.isEmpty()) {
+
+
+						NewCallers=NewCallers.AddAll(inter.Callers); 
+
+					}
+				}
+			}
+
+			if(!this.Superclasses.isEmpty()) {
+				for(Method2 superclass: this.Superclasses) {
+					if(!superclass.Callers.isEmpty()) {
+
+						NewCallers=NewCallers.AddAll(superclass.Callers); 
+
+					}
+				}
+			}
+			
+			
+			for(Method2 Caller: NewCallers) {
+				if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
+					FinalCallers.add(Caller); 
+				}
+				else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
+					if(!Caller.Owner.ID.equals(this.Owner.ID)){
+						FinalCallers.add(Caller); 
+					}else {
+						if(!Caller.Callers.isEmpty()) {
+							FinalCallers.addAll(Caller.Callers); 
+							
+//							//ADDED NEW CODE TO GET INTERFACES AND SUPERCLASSES OF CALLERS OF CALLERS 
+//									for(Method mycaller:Caller.Callers) {
+//										if(!mycaller.Interfaces.isEmpty()) {
+//											for(Method inter: mycaller.Interfaces) {
+//												if(!inter.Callers.isEmpty()) {
 //		
-//		MethodList NewCallers= new MethodList();
-//		NewCallers.addAll(Callers);
-//		MethodList FinalCallers = new MethodList();
 //		
-//			if(!this.Interfaces.isEmpty()) {
-//				for(Method inter: this.Interfaces) {
-//					if(!inter.Callers.isEmpty()) {
-//
-//
-//						NewCallers=NewCallers.AddAll(inter.Callers); 
-//
-//					}
-//				}
-//			}
-//
-//			if(!this.Superclasses.isEmpty()) {
-//				for(Method superclass: this.Superclasses) {
-//					if(!superclass.Callers.isEmpty()) {
-//
-//						NewCallers=NewCallers.AddAll(superclass.Callers); 
-//
-//					}
-//				}
-//			}
-//			
-//			
-//			for(Method Caller: NewCallers) {
-//				if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
-//					FinalCallers.add(Caller); 
-//				}
-//				else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
-//					if(!Caller.Owner.ID.equals(this.Owner.ID)){
-//						FinalCallers.add(Caller); 
-//					}else {
-//						if(!Caller.Callers.isEmpty()) {
-//							FinalCallers.addAll(Caller.Callers); 
-//							
-////							//ADDED NEW CODE TO GET INTERFACES AND SUPERCLASSES OF CALLERS OF CALLERS 
-////									for(Method mycaller:Caller.Callers) {
-////										if(!mycaller.Interfaces.isEmpty()) {
-////											for(Method inter: mycaller.Interfaces) {
-////												if(!inter.Callers.isEmpty()) {
-////		
-////		
-////													FinalCallers=FinalCallers.AddAll(inter.Callers); 
-////		
-////												}
-////											}
-////										}
-////		
-////										if(!mycaller.Superclasses.isEmpty()) {
-////											for(Method superclass: mycaller.Superclasses) {
-////												if(!superclass.Callers.isEmpty()) {
-////		
-////													FinalCallers=FinalCallers.AddAll(superclass.Callers); 
-////		
-////												}
-////											}
-////										}
-////									}
-//
-//						}else {
-//							FinalCallers.add(Caller); 
-//
+//													FinalCallers=FinalCallers.AddAll(inter.Callers); 
+//		
+//												}
+//											}
+//										}
+//		
+//										if(!mycaller.Superclasses.isEmpty()) {
+//											for(Method superclass: mycaller.Superclasses) {
+//												if(!superclass.Callers.isEmpty()) {
+//		
+//													FinalCallers=FinalCallers.AddAll(superclass.Callers); 
+//		
+//												}
+//											}
+//										}
+//									}
+
+						}else {
+							FinalCallers.add(Caller); 
+
+						}
+
+//						for(Method CallerOfCaller: Caller.getCallers(requirement)) {
+//							FinalCallers.add(CallerOfCaller);
+//						for(Method CallerOfCaller: Caller.Callers) {
+//							if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("T") 
+//									||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("N")) {
+//								FinalCallers.add(CallerOfCaller); 
+//							}
+//							else if(!CallerOfCaller.Owner.ID.equals(Caller.Owner.ID)
+//									&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("E")){
+//								FinalCallers.add(CallerOfCaller); 
+//							}
 //						}
-//
-////						for(Method CallerOfCaller: Caller.getCallers(requirement)) {
-////							FinalCallers.add(CallerOfCaller);
-////						for(Method CallerOfCaller: Caller.Callers) {
-////							if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("T") 
-////									||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("N")) {
-////								FinalCallers.add(CallerOfCaller); 
-////							}
-////							else if(!CallerOfCaller.Owner.ID.equals(Caller.Owner.ID)
-////									&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("E")){
-////								FinalCallers.add(CallerOfCaller); 
-////							}
-////						}
-//					}
-//				}
-//			}
-//		
-//
-//		
-//		
-//		FinalCallers=RemoveDuplicates(FinalCallers); 
-//		
-//		
-//		return FinalCallers; 
-//
-//	}
+					}
+				}
+			}
+		
+
+		
+		
+		FinalCallers=RemoveDuplicates(FinalCallers); 
+		
+		
+		return FinalCallers; 
+
+	}
 	
 /*	
 	public MethodList getOuterCallersFinal(Requirement requirement) {
@@ -759,14 +752,14 @@ public class Method {
 		else {
 			Excludedcallees.add(this);
 			if (this.Owner == excludedOwner)
-				for(Method callee: this.Callees) callee.findOuterCallees(excludedOwner, Excludedcallees); 
+				for(Method2 callee: this.Callees) callee.findOuterCallees(excludedOwner, Excludedcallees); 
 			else
 				OuterCallees.add(this);
 
-			for(Method implementationMethod: this.Implementations)
+			for(Method2 implementationMethod: this.Implementations)
 				implementationMethod.findOuterCallees(excludedOwner, Excludedcallees); 
 			
-			for(Method childMethod: this.Children)
+			for(Method2 childMethod: this.Children)
 				childMethod.findOuterCallees(excludedOwner, Excludedcallees);
 		}
 	}
@@ -781,13 +774,13 @@ public class Method {
 			Excludedcallers.add(this);
 			 
 			if (this.Owner == excludedOwner) {
-				for(Method interfaceMethod: this.Interfaces)
+				for(Method2 interfaceMethod: this.Interfaces)
 					interfaceMethod.findOuterCallers(excludedOwner, Excludedcallers); 
 
-				for(Method parentMethod: this.Superclasses)
+				for(Method2 parentMethod: this.Superclasses)
 					parentMethod.findOuterCallees(excludedOwner, Excludedcallers); 
 
-				for(Method caller: this.Callers) caller.findOuterCallers(excludedOwner, Excludedcallers);
+				for(Method2 caller: this.Callers) caller.findOuterCallers(excludedOwner, Excludedcallers);
 			}
 			else
 				OuterCallers.add(this); 
@@ -863,7 +856,7 @@ public class Method {
 		MethodList FinalCallers = new MethodList();
 		
 			if(!this.Interfaces.isEmpty()) {
-				for(Method inter: this.Interfaces) {
+				for(Method2 inter: this.Interfaces) {
 					if(!inter.Callers.isEmpty()) {
 
 
@@ -874,7 +867,7 @@ public class Method {
 			}
 
 			if(!this.Superclasses.isEmpty()) {
-				for(Method superclass: this.Superclasses) {
+				for(Method2 superclass: this.Superclasses) {
 					if(!superclass.Callers.isEmpty()) {
 
 						NewCallers=NewCallers.AddAll(superclass.Callers); 
@@ -894,7 +887,7 @@ private MethodList RemoveDuplicates(MethodList finalCallers) {
 		// TODO Auto-generated method stub
 	MethodList FinalCallers2= new MethodList(); 
 	
-	for(Method finalcaller: finalCallers) {
+	for(Method2 finalcaller: finalCallers) {
 		if(!FinalCallers2.contains(finalcaller)) {
 			FinalCallers2.add(finalcaller); 
 		}
@@ -913,7 +906,7 @@ public MethodList getOuterCallers(Requirement requirement) {
 	
 MethodList FinalCallers=	getCallers(requirement); 
 MethodList OuterCallers= new MethodList(); 
-for(Method FinalCaller: FinalCallers) {
+for(Method2 FinalCaller: FinalCallers) {
 	if(!this.Owner.ID.equals(FinalCaller.Owner.ID)) {
 		OuterCallers.add(FinalCaller); 
 	}
@@ -933,7 +926,7 @@ public MethodList getOuterCallees(Requirement requirement) {
 	
 MethodList FinalCallees=	getCallees(requirement); 
 MethodList OuterCallees= new MethodList(); 
-for(Method FinalCallee: FinalCallees) {
+for(Method2 FinalCallee: FinalCallees) {
 	if(!this.Owner.ID.equals(FinalCallee.Owner.ID)) {
 		OuterCallees.add(FinalCallee); 
 	}
@@ -957,7 +950,7 @@ return OuterCallees;
 		if(!this.Children.isEmpty()) {
 
 
-			for(Method child: this.Children) {
+			for(Method2 child: this.Children) {
 				if(!child.Callees.isEmpty()) {
 					child.CalleeChildFlag=true; 
 					NewCallees=	NewCallees.AddAll(child.Callees); 
@@ -981,7 +974,7 @@ return OuterCallees;
 		MethodList NewCallees= new MethodList();
 
 		if(!this.Implementations.isEmpty()) {
-			for(Method imp: this.Implementations) {
+			for(Method2 imp: this.Implementations) {
 
 				if(!imp.Callees.isEmpty()) {
 					NewCallees=NewCallees.AddAll(imp.Callees); 
@@ -1005,7 +998,7 @@ return OuterCallees;
 	public MethodList getInterfaceCallers(Requirement requirement) {
 		MethodList NewCallers= new MethodList();
 		if(!this.Interfaces.isEmpty()) {
-			for(Method inter: this.Interfaces) {
+			for(Method2 inter: this.Interfaces) {
 				if(!inter.Callers.isEmpty()) {
 
 
@@ -1022,7 +1015,7 @@ return OuterCallees;
 	public MethodList getSuperclassCallers(Requirement requirement) {
 		MethodList NewCallers= new MethodList();
 	if(!this.Superclasses.isEmpty()) {
-		for(Method superclass: this.Superclasses) {
+		for(Method2 superclass: this.Superclasses) {
 			if(!superclass.Callers.isEmpty()) {
 
 				NewCallers=NewCallers.AddAll(superclass.Callers); 
@@ -1045,7 +1038,7 @@ return OuterCallees;
 	public MethodList getCallees(Requirement requirement) {
 		// TODO Auto-generated method stub
 		if(AlgoFinal.ExtendedFlag==true) {
-			return this.getExtendedCallees(requirement); 
+			return this.getExtendedCallees2(requirement); 
 		}
 		else if(AlgoFinal.BasicFlag==true) {
 			return this.getBasicCallees(requirement); 
@@ -1067,17 +1060,17 @@ return OuterCallees;
 //		
 //	}
 	
-	private MethodList getExtendedCallees(Requirement requirement) {
-		
-		if(this.FirstTimeCallees==false) {
-			
+	private MethodList getExtendedCallees2(Requirement requirement) {
+		if(NewCallees==null) {
+			MethodList NewCallees= new MethodList();
+			 MethodList NewCallees2= new MethodList(); 
 
 			 
 					NewCallees.addAll(this.Callees); 
 					MethodList list=new MethodList();
 					MethodList list2=new MethodList();
 
-					for(Method callee: this.Callees) {
+					for(Method2 callee: this.Callees) {
 						//callee is inside the box and caller is outside the box 
 						constructBox(callee, NewCallees, list); 
 
@@ -1085,22 +1078,21 @@ return OuterCallees;
 					
 					//caller is inside the box and callees are outside 
 					constructBox(this, NewCallees2, list2); 
-					for(Method newCallee: NewCallees2) {
+					for(Method2 newCallee: NewCallees2) {
 						NewCallees.addAll(newCallee.Callees); 
 					}
 
 					System.out.println(NewCallees);
-					this.FirstTimeCallees=true; 
-					
+			 
+		
 		}
-			
-		
-		
-		NewCallees=RemoveDuplicates(NewCallees); 
+		if(NewCallees==null) {
+			NewCallees= new MethodList(); 
+		}
 		return NewCallees; 
 	}
 	
-	private MethodList constructBox(Method newcallee, MethodList NewCallees, MethodList list) {
+	private MethodList constructBox(Method2 newcallee, MethodList NewCallees, MethodList list) {
 	// TODO Auto-generated method stub
 		//callee is an interface that posesses implementations
 		System.out.println(newcallee);
@@ -1108,55 +1100,28 @@ return OuterCallees;
 			return NewCallees;
 		}list.add(newcallee);
 		if(!newcallee.Implementations.isEmpty()|| !newcallee.Interfaces.isEmpty()|| !newcallee.Superclasses.isEmpty()|| !newcallee.Children.isEmpty()) {
-			for(Method callee2: newcallee.Implementations) {
+			for(Method2 callee2: newcallee.Implementations) {
 				NewCallees.add(callee2); 
 				callee2.constructBox(callee2, NewCallees, list); 
 			}
-			for(Method callee2: newcallee.Interfaces) {
+			for(Method2 callee2: newcallee.Interfaces) {
 
-				NewCallees.add(callee2); 
-
-				callee2.constructBox(callee2, NewCallees, list); 
-
-			}
-			for(Method callee2: newcallee.Superclasses) {
 				NewCallees.add(callee2); 
 
 				callee2.constructBox(callee2, NewCallees, list); 
 
 			}
-			for(Method callee2: newcallee.Children) {
+			for(Method2 callee2: newcallee.Superclasses) {
+				NewCallees.add(callee2); 
+
+				callee2.constructBox(callee2, NewCallees, list); 
+
+			}
+			for(Method2 callee2: newcallee.Children) {
 				NewCallees.add(callee2); 
 				callee2.constructBox(callee2, NewCallees, list); 
 
 			}
-			}else if(!newcallee.Owner.Children.isEmpty()) {
-				for(Clazz imp: newcallee.Owner.Children) {
-					List<Clazz> myimps2 = imp.Implementations; 
-					for(Clazz myimp: myimps2) {
-						for(Method ImplementationMethod: myimp.methods) {
-							if(ImplementationMethod.methodname.equals(newcallee.methodname)) {
-								System.out.println("YES");
-								NewCallees.add(ImplementationMethod); 
-								ImplementationMethod.constructBox(ImplementationMethod, NewCallees, list); 
-							}
-						}
-						
-					}
-					
-					List<Clazz> myinters = imp.Interfaces; 
-					for(Clazz myinter: myinters) {
-						for(Method InterfaceMethod: myinter.methods) {
-							if(InterfaceMethod.methodname.equals(newcallee.methodname)) {
-								System.out.println("YES");
-								NewCallees.add(InterfaceMethod); 
-								InterfaceMethod.constructBox(InterfaceMethod, NewCallees, list); 
-							}
-						}
-						
-					}
-					
-				}
 			}
 		System.out.println(NewCallees.size());
 		NewCallees=	RemoveDuplicates(NewCallees);
@@ -1168,7 +1133,7 @@ return OuterCallees;
 	public MethodList getCallers(Requirement requirement) {
 		// TODO Auto-generated method stub
 		if(AlgoFinal.ExtendedFlag==true) {
-			return this.getExtendedCallers(requirement); 
+			return this.getExtendedCallers2(requirement); 
 		}
 		else if(AlgoFinal.BasicFlag==true) {
 			return this.getBasicCallers(requirement); 
@@ -1181,40 +1146,43 @@ return OuterCallees;
 		return null;
 	}
 /////////////////////////////////////////////////////////////////////////////////
-	private MethodList getExtendedCallers(Requirement requirement) {
+	private MethodList getExtendedCallers2(Requirement requirement) {
+		// TODO Auto-generated method stub
+		MethodList NewCallers= new MethodList(); 
+
+		NewCallers.addAll(this.Callers); 
 		
-			if(this.FirstTimeCallers==false) {
-			
+		for(Method2 caller: this.Callers) {
+			//caller is an implementation that possesses an interface  
+			NewCallers.addAll(caller.Interfaces); 
+			NewCallers.addAll(caller.Implementations); 
+			//caller is a child that possesses a superclass 
+			NewCallers.addAll(caller.Superclasses); 
+			NewCallers.addAll(caller.Children); 
 
-				 
-						NewCallers.addAll(this.Callers); 
-						MethodList list=new MethodList();
-						MethodList list2=new MethodList();
-
-						for(Method caller: this.Callers) {
-							//callee is inside the box and caller is outside the box 
-							constructBox(caller, NewCallers, list); 
-							
-
-						}
-						
-						//caller is inside the box and callees are outside 
-						constructBox(this, NewCallers2, list2); 
-						for(Method newCaller: NewCallers2) {
-							NewCallers.addAll(newCaller.Callers); 
-						}
-
-						System.out.println(NewCallers);
-						this.FirstTimeCallers=true; 
-						
-			}
+		}
 		
+		//current method is an implementation that possesses interfaces 
+		for(Method2 interfacemethod: this.Interfaces) {
+//			NewCallers.add(interfacemethod); 
+			NewCallers.addAll(interfacemethod.Callers); 
+		}
+		//current method is a child that possesses superclasses 
+		for(Method2 superclassmethod: this.Superclasses) {
+//			NewCallers.add(superclassmethod); 
+			NewCallers.addAll(superclassmethod.Callers); 
+		}
 		
-			 
-		
-		NewCallers=RemoveDuplicates(NewCallers); 
+		for(Method2 imp: this.Implementations) {
+//			NewCallers.add(interfacemethod); 
+			NewCallers.addAll(imp.Callers); 
+		}
 
-		return NewCallers; 
+		for(Method2 child: this.Children) {
+//			NewCallers.add(superclassmethod); 
+			NewCallers.addAll(child.Callers); 
+		}
+		return NewCallers;
 	}
 /////////////////////////////////////////////////////////////////////////////////
 
