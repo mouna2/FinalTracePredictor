@@ -24,6 +24,7 @@ import Tables.methodcalls;
 import mypackage.ClassTrace2;
 import mypackage.Method;
 import mypackage.MethodTrace;
+import mypackage.Requirement;
 
 public class LogInfo {
 	String MethodID; 
@@ -608,7 +609,11 @@ public class LogInfo {
 		OuterCallersPredictions = outerCallersPredictions;
 	}
 	
-	
+	public static BufferedWriter bwchessMethodCallsWriter =null; 
+	public static BufferedWriter bwGANTTMethodCallsWriter =null; 
+	public static BufferedWriter bwiTrustMethodCallsWriter =null; 
+	public static BufferedWriter bwJHotDrawMethodCallsWriter =null; 
+
 	public static BufferedWriter bwfile1 = null;
 	public static BufferedWriter bwTraceClass = null;
 	
@@ -976,6 +981,10 @@ public class LogInfo {
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenChess = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 				
+				
+				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\ChessFiles\\MethodCalls.txt");
+				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
+				 bwchessMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 				System.out.println("yes");
 		}
 
@@ -1003,6 +1012,10 @@ public class LogInfo {
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenGantt = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 		
+				
+				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\GanttFiles\\MethodCalls.txt");
+				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
+				 bwGANTTMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 		}
 
 		if (ProgramName.equals("itrust")) {
@@ -1030,6 +1043,10 @@ public class LogInfo {
 			File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust.txt");
 			FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 			bwSuperclassesChildreniTrust = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
+			
+			File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\iTrustFiles\\MethodCalls.txt");
+			FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
+			 bwiTrustMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 		}
 
 		if (ProgramName.equals("jhotdraw")) {
@@ -1058,6 +1075,11 @@ public class LogInfo {
 				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw.txt");
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenJHotDraw = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
+			
+				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\JHotDrawFiles\\MethodCalls.txt");
+				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
+				 bwJHotDrawMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
+				
 		}
 		// bwfile2.newLine();
 		
@@ -1516,6 +1538,34 @@ public class LogInfo {
 			
 
 		}
+	}
+	public static void WriteMethodCalls(String programName) throws IOException {
+		if(programName.equals("chess")) {
+			WriteMethodCallsProgram(bwchessMethodCallsWriter); 
+		}
+		if(programName.equals("gantt")) {
+			WriteMethodCallsProgram(bwGANTTMethodCallsWriter); 
+		}
+		if(programName.equals("itrust")) {
+			WriteMethodCallsProgram(bwiTrustMethodCallsWriter); 
+		}
+		if(programName.equals("jhotdraw")) {
+			WriteMethodCallsProgram(bwJHotDrawMethodCallsWriter); 
+		}
+	}
+	private static void WriteMethodCallsProgram(BufferedWriter bwchessMethodCallsWriter) throws IOException {
+		// TODO Auto-generated method stub
+		for( String meth:DatabaseInput.MethodHashMap.keySet()) {
+			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getExtendedCallees(new Requirement("1", "R0"))) {
+				bwchessMethodCallsWriter.write(""+DatabaseInput.MethodHashMap.get(meth).getClassrep().classname+"."+DatabaseInput.MethodHashMap.get(meth).methodname+"---");
+				
+				bwchessMethodCallsWriter.write(callee.getClassrep().classname+"."+callee.methodname);
+				bwchessMethodCallsWriter.newLine();
+			}
+			
+
+		}
+		bwchessMethodCallsWriter.close();
 	}
 
 

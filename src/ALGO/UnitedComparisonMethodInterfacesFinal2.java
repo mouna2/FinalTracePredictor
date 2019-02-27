@@ -47,6 +47,7 @@ public class UnitedComparisonMethodInterfacesFinal2 {
 	}
 
 	
+	
 
 	/**
 	 * Get a new database connection

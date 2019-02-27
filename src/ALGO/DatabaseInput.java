@@ -20,7 +20,7 @@ import spoon.pattern.internal.SubstitutionRequestProvider;
 
 public class DatabaseInput {
 	
-	static HashMap<String, Method> MethodHashMap = new HashMap<String, Method>();
+	public static HashMap<String, Method> MethodHashMap = new HashMap<String, Method>();
 
 	static HashMap<String, Clazz> ClassHashMap = new HashMap<String, Clazz>();
 	static HashMap<String, Requirement> RequirementHashMap = new HashMap<String, Requirement>();

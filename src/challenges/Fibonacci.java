@@ -1,54 +1,28 @@
 package challenges;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
-public class Fibonacci {
-    
-    public static void main(String[] args) {
-    	Scanner sc= new Scanner(System.in); 
-    	String input=sc.nextLine(); 
-    	System.out.println(input);
-    	
-    	String[] arr = input.split(" "); 
-//    	System.out.println(arr);
-    	int NumberOfPeople= Integer.parseInt(arr[0]); 
-    	int skipped= Integer.parseInt(arr[1]); 
-    	kill(NumberOfPeople, skipped); 
-
+/*Please note that it's Function problem i.e.
+you need to write your solution in the form of Function(s) only.
+Driver Code to call/invoke your function is mentioned above.*/
+//A Binary Tree node
+class Node
+{
+    int data;
+    Node left, right;
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
     }
-
-	private static void kill(int numberOfPeople, int skipped) {
-		// TODO Auto-generated method stub
-		List<Integer> mylist = new ArrayList<Integer>(); 
-		List<Integer> Removed = new ArrayList<Integer>(); 
-		for(int i=1; i<=numberOfPeople; i++) {
-			mylist.add(i); 
-		}
-		int count=0; 
-		for(int i: mylist) {
-				
-				if(count==skipped) {
-					Removed.add(i); 
-					count=0; 
-				}else {
-					count++; 
-				}
-				
-			
-		}
-		
-		
-		for(int i: Removed) {
-			mylist.remove(i-1); 
-		}
-		if(mylist.size()==1) {
-			System.out.println(mylist.get(0));
-		}
-		if(mylist.size()>1) {
-		kill(mylist.size(), skipped); 
-		}
-	}
-
+} 
+class GfG
+{
+    int height(Node node) 
+    {
+        if(node == null)
+            return 0;
+        //if(node.left == null && node.right == null)
+        //    return 1;
+        return 1 + Math.max(height(node.left), height(node.right)); 
+    }   
 }
