@@ -39,7 +39,7 @@ public class DatabaseReading {
 		connectionProps.put("root", this.userName);
 		connectionProps.put("123456", this.password);
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database"+programName, "root", "123456");
-	
+
 
 		// Interact with model
 

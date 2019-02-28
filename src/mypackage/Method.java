@@ -605,13 +605,13 @@ return OuterCallees;
 	public MethodList getExtendedCallees(Requirement requirement) {
 		
 		if(this.FirstTimeCallees==false) {
-				
+				MethodList childrenCallees= new MethodList(); 
 					ExtendedCallees.addAll(this.Callees); 
 					if(AlgoFinal.InterfaceImplementationFlag==true) {
-						ExtendedCallees.addAll(getInterfaceImplementationCallees(this, ExtendedCallees)); 
+						ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
 					}
 					if(AlgoFinal.InheritanceFlag==true) {
-						ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees)); 
+						ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
 
 					}
 
@@ -626,8 +626,8 @@ return OuterCallees;
 	}
 		/////////////////////////////////////////////////////////////////////////
 
-	private MethodList getInterfaceImplementationCallees(Method method, MethodList ExtendedCallees) {
-	// TODO Auto-generated method stub
+	private MethodList getInterfaceImplementationCallees(MethodList ExtendedCallees) {
+	
 		MethodList CalleeInterfaceImplementations= new MethodList(); 
 		for(Method callee: ExtendedCallees) {
 			
@@ -638,24 +638,23 @@ return OuterCallees;
 
 		}
 		//case 7
-		for(Method implementation: method.Implementations) {
+		for(Method implementation: this.Implementations) {
 			CalleeInterfaceImplementations.AddAll(implementation.Callees); 
 		}
 	return CalleeInterfaceImplementations;
 }
 	/////////////////////////////////////////////////////////////////////////
 
-	private MethodList getInheritanceCallees(MethodList ExtendedCallees) {
+	private MethodList getInheritanceCallees(MethodList nextLevelCallees, MethodList ChildrenCallees) {
 		// TODO Auto-generated method stub
 		//case 12
-		MethodList ChildrenCallees=new MethodList(); 
-		for(Method callee: ExtendedCallees) {
+		for(Method callee: nextLevelCallees) {
 				ChildrenCallees.AddAll(callee.Children); 
 				
 				//Recursive Call 
 				if(AlgoFinal.InheritanceRecursion==true) {
 					
-					getInheritanceCallees(callee.Children); 
+						getInheritanceCallees(callee.Children, ChildrenCallees); 
 				}
 				
 		}
@@ -668,13 +667,13 @@ return OuterCallees;
 			if(this.FirstTimeCallers==false) {
 			
 
-				 
+				 MethodList SuperclassCallers= new MethodList(); 
 						ExtendedCallers.addAll(this.Callers); 
 						if(AlgoFinal.InheritanceFlag==true) {
-						ExtendedCallers.addAll(getInheritanceCallers(this)); 
+						ExtendedCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
 						}
 						if(AlgoFinal.InterfaceImplementationFlag==true) {
-						ExtendedCallers.addAll(getInterfaceImplementationCallers(this, ExtendedCallers)); 
+						ExtendedCallers.addAll(getInterfaceImplementationCallers(ExtendedCallers)); 
 						}
 						
 						this.FirstTimeCallers=true; 
@@ -690,15 +689,15 @@ return OuterCallees;
 	}
 	/////////////////////////////////////////////////////////////////////////
 
-private MethodList getInterfaceImplementationCallers(Method method, MethodList ExtendedCallers) {
+private MethodList getInterfaceImplementationCallers(MethodList ExtendedCallers) {
 	// TODO Auto-generated method stub
 	MethodList InterfaceImplementationCallers= new MethodList();
 		//case 20
-		for(Method CallerInterface: method.Interfaces) {
+		for(Method CallerInterface: this.Interfaces) {
 			InterfaceImplementationCallers.addAll(CallerInterface.Callers); 
 		}
 		//case 21
-		for(Method CallerImplementation: method.Implementations) {
+		for(Method CallerImplementation: this.Implementations) {
 			InterfaceImplementationCallers.addAll(CallerImplementation.Callers); 
 		}
 		//case 22
@@ -711,17 +710,19 @@ private MethodList getInterfaceImplementationCallers(Method method, MethodList E
 }
 /////////////////////////////////////////////////////////////////////////
 
-private MethodList getInheritanceCallers(Method method) {
+private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 	// TODO Auto-generated method stub
 	
 	//case 28
-	MethodList SuperclassCallers= new MethodList(); 
-			for(Method mysuperclass: method.Superclasses) {
+			for(Method mysuperclass: this.Superclasses) {
 				SuperclassCallers.addAll(mysuperclass.Callers); 
 				
 				//Recursive Call 
 				if(AlgoFinal.InheritanceRecursion==true) {
-				getInheritanceCallers(mysuperclass); 
+					System.out.println("yes");
+					mysuperclass.getInheritanceCallers(SuperclassCallers); 	
+					
+				
 				}
 			}
 		
