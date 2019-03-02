@@ -673,25 +673,65 @@ return OuterCallees;
 //	
 //	
 //	}
-				
-		if(ExtendedCallees==null) {
-			ExtendedCallees= new MethodList(); 
+			
+		
+		
+		
+		
+		
+		
+		/********************************************************************************/
+		/********************************************************************************/
+
+		//PREVIOUS VERSION WITHOUT RECURSIVE DESCENT 
+//		if(ExtendedCallees==null) {
+//			ExtendedCallees= new MethodList(); 
+//			MethodList childrenCallees= new MethodList(); 
+//				ExtendedCallees.addAll(this.Callees); 
+//				if(AlgoFinal.InterfaceImplementationFlag==true) {
+//					ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
+//				}
+//				if(AlgoFinal.InheritanceFlag==true) {
+//					ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
+//
+//				}
+//
+//			
+//				ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
+//
+//	}
+		/********************************************************************************/
+		/********************************************************************************/
+		if (ExtendedCallees!=null) {return ExtendedCallees; }
+		else {
+			ExtendedCallees= new MethodList();
+			MethodList TempCallees=new MethodList(); 
 			MethodList childrenCallees= new MethodList(); 
-				ExtendedCallees.addAll(this.Callees); 
+			TempCallees.addAll(this.Callees); 
 				if(AlgoFinal.InterfaceImplementationFlag==true) {
-					ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
+					TempCallees.addAll(getInterfaceImplementationCallees(TempCallees)); 
 				}
 				if(AlgoFinal.InheritanceFlag==true) {
-					ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
+					TempCallees.addAll(getInheritanceCallees(TempCallees, childrenCallees)); 
 
 				}
 
-			
-				ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
-
-	}
-		
-	
+				if (AlgoFinal.RecursiveDescent==true) {
+					
+					for(Method callee: TempCallees) {
+						if(!callee.Owner.ID.equals(this.Owner.ID)) {
+							ExtendedCallees.add(callee); 
+						}else {
+							ExtendedCallees.addAll(callee.getExtendedCallees()); 
+						}
+					}
+					
+				}else {
+					ExtendedCallees=TempCallees; 
+				}
+						
+		}
+				
 	
 	return ExtendedCallees; 
 			
@@ -786,31 +826,65 @@ return OuterCallees;
 //		}//NO RECURSION 
 //		else 
 			
-			if(ExtendedCallers==null ) {
-			
-				
-				
-				ExtendedCallers=new MethodList(); 
-				 MethodList SuperclassCallers= new MethodList(); 
-						ExtendedCallers.addAll(this.Callers); 
-			
-						if(AlgoFinal.InheritanceFlag==true) {
-						ExtendedCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
-						
-						}
-						if(AlgoFinal.InterfaceImplementationFlag==true) {
-						ExtendedCallers.addAll(getInterfaceImplementationCallers(ExtendedCallers)); 
-							
-						}
-						
-						ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
-						
-						
-						
-						
-			
-		}
+
+		
+		
+//RECURSION WITHOUT RECURSIVE DESCENT 		
+//			if(ExtendedCallers==null ) {
+//			
+//				
+//				
+//				ExtendedCallers=new MethodList(); 
+//				 MethodList SuperclassCallers= new MethodList(); 
+//						ExtendedCallers.addAll(this.Callers); 
+//			
+//						if(AlgoFinal.InheritanceFlag==true) {
+//						ExtendedCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
+//						
+//						}
+//						if(AlgoFinal.InterfaceImplementationFlag==true) {
+//						ExtendedCallers.addAll(getInterfaceImplementationCallers(ExtendedCallers)); 
+//							
+//						}
+//						
+//						ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
+//						
+//						
+//						
+//						
+//			
+//		}
 	
+		
+		
+		if(ExtendedCallers!=null) {
+			return ExtendedCallers; 
+		}
+		else {
+			ExtendedCallers= new MethodList(); 
+			MethodList TempCallers= new MethodList(); 
+			MethodList SuperclassCallers= new MethodList(); 
+			TempCallers.addAll(this.Callers); 
+			if(AlgoFinal.InheritanceFlag==true) {
+				TempCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
+			}
+			if(AlgoFinal.InterfaceImplementationFlag==true) {
+				TempCallers.addAll(getInterfaceImplementationCallers(TempCallers)); 
+					
+				}
+			
+			if(AlgoFinal.RecursiveDescent==true) {
+				for(Method caller: TempCallers) {
+					if(!caller.Owner.ID.equals(this.Owner.ID)) {
+						ExtendedCallers.add(caller); 
+					}else {
+						ExtendedCallers.addAll(caller.getExtendedCallers()); 
+					}
+				}
+			}else {
+				ExtendedCallers=TempCallers; 
+			}
+		}
 	
 		 
 	

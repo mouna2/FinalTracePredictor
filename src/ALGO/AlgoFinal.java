@@ -60,10 +60,8 @@ public class AlgoFinal extends JFrame {
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
 	public static boolean InheritanceRecursion=true; 
-	public static boolean RecursiveDescent=true; 
 	
-	public static boolean RecursiveCallFlag=false; 
-
+	public static boolean RecursiveDescent=true; 
 	/**
 	 * Run a SQL command which does not return a recordset:
 	 * CREATE/INSERT/UPDATE/DELETE/DROP/etc.
@@ -1679,11 +1677,11 @@ public class AlgoFinal extends JFrame {
 //		AlgoFinal frame = new AlgoFinal(
 //				ProgramName);
 
-//		String ProgramName2 = "gantt";
-//		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
-		
-		String ProgramName2 = "dummy";
+		String ProgramName2 = "gantt";
 		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
+		
+//		String ProgramName2 = "dummy";
+//		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 
 //		String ProgramName3 = "itrust";
 //			 frame = new AlgoFinal(ProgramName3);
