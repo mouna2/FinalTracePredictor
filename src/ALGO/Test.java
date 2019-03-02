@@ -43,7 +43,8 @@ class Test {
 	}
 
 	private void SetExpectedValues(HashMap<String, String> methodHashMapCallees,
-			HashMap<String, String> methodHashMapCallers) {methodHashMapCallers.put("1","[]");
+			HashMap<String, String> methodHashMapCallers) {
+			methodHashMapCallers.put("1","[]");
 			methodHashMapCallees.put("1","[2, methodname=m2]");
 			methodHashMapCallers.put("2","[1, methodname=m1]");
 			methodHashMapCallees.put("2","[]");
