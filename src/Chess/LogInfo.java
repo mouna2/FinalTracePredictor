@@ -1539,7 +1539,7 @@ public class LogInfo {
 
 		}
 	}
-	public static void WriteMethodCalls(String programName) throws IOException {
+	public static void WriteMethodCalls(String programName) throws IOException, CloneNotSupportedException {
 		if(programName.equals("chess")) {
 			WriteMethodCallsProgram(bwchessMethodCallsWriter); 
 		}
@@ -1553,10 +1553,10 @@ public class LogInfo {
 			WriteMethodCallsProgram(bwJHotDrawMethodCallsWriter); 
 		}
 	}
-	private static void WriteMethodCallsProgram(BufferedWriter bwchessMethodCallsWriter) throws IOException {
+	private static void WriteMethodCallsProgram(BufferedWriter bwchessMethodCallsWriter) throws IOException, CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		for( String meth:DatabaseInput.MethodHashMap.keySet()) {
-			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getExtendedCallees(new Requirement("1", "R0"))) {
+			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getCalleesShell()) {
 				bwchessMethodCallsWriter.write(""+DatabaseInput.MethodHashMap.get(meth).getClassrep().classname+"."+DatabaseInput.MethodHashMap.get(meth).methodname+"---");
 				
 				bwchessMethodCallsWriter.write(callee.getClassrep().classname+"."+callee.methodname);

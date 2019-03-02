@@ -18,11 +18,14 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
 import java.awt.Component;
+import java.lang.invoke.MethodHandle;
 public class Method {
 	 boolean FirstTimeCallers=false; 
 	 boolean FirstTimeCallees=false; 
-
-	
+	 public boolean VisitedFlag=false; 
+	 MethodList VisitedCallers= new MethodList(); 
+	 final MethodList VisitedCallees= new MethodList(); 
+	 MethodList VisitedCalleesFinal= new MethodList(); 
 	public String ID; 
 	public boolean NewPatternFlag= false; 
 	public boolean CalleeImplementationFlag= false; 
@@ -32,8 +35,8 @@ public class Method {
 	static MethodList OuterCallers=new MethodList();
 	static MethodList OuterCallees=new MethodList();
 	Method meth =null; 
-	public  MethodList ExtendedCallees=new MethodList();
-	public  MethodList ExtendedCallers=new MethodList();
+	public  MethodList ExtendedCallees=null; 
+	public  MethodList ExtendedCallers=null; 
 	public  MethodList NewCallees2=new MethodList();
 	public  MethodList NewCallers2=new MethodList();
 	public String methodname;
@@ -602,27 +605,101 @@ return OuterCallees;
 	//////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-	public MethodList getExtendedCallees(Requirement requirement) {
+	public MethodList getExtendedCallees() throws CloneNotSupportedException {
+////		if(this.FirstTimeCallees==false && !VisitedCallees.contains(this) && AlgoFinal.RecursiveDescent==true) {
+//		
+//		//RECURSION 
+//		if(this.FirstTimeCallees==false && AlgoFinal.RecursiveDescent==true ) {
+//			
+//					
+//			this.VisitedFlag=true; 
+//				
+//				MethodList childrenCallees= new MethodList(); 
+////					ExtendedCallees.addAll(this.Callees); 
+//					for(Method callee: this.Callees) {
+//						if(!callee.Owner.ID.equals(this.Owner.ID)) {
+//							ExtendedCallees.add(callee); 
+//						}else {
+//							ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
+//							
+//						}
+//					}
+//					if(AlgoFinal.InterfaceImplementationFlag==true) {
+////						ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
+//						for(Method callee:getInterfaceImplementationCallees(ExtendedCallees)) {
+//							if(!callee.Owner.ID.equals(this.Owner.ID)) {
+//								ExtendedCallees.add(callee); 
+//							}else {
+//								ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
+//								
+//							}
+//						}
+//					}
+//					if(AlgoFinal.InheritanceFlag==true) {
+////						ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
+//						for(Method callee:getInheritanceCallees(ExtendedCallees, childrenCallees)) {
+//							if(!callee.Owner.ID.equals(this.Owner.ID)) {
+//								ExtendedCallees.add(callee); 
+//							}else {
+//								ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
+//								
+//							}
+//						}
+//					}
+//
+//					 
+//					ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
+//
+//		} //NO RECURSION 
+//		if etended callee not null return extendedcsll
+//			extendedcalee is empty
+//					MethodList childrenCallees= new MethodList(); 
+//						x.addAll(this.Callees); 
+//						if(AlgoFinal.InterfaceImplementationFlag==true) {
+//							x.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
+//						}
+//						if(AlgoFinal.InheritanceFlag==true) {
+//							x.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
+//
+//						}
+//
+//						if (flag)
+///						loop x
+//							if outer 
+//							    extendedcalee . add
+//							    else
+//							    	extendedcallee.addall(getextendedcalle)
+//			
+//	
+//	
+//	}
+				
+		if(ExtendedCallees==null) {
+			ExtendedCallees= new MethodList(); 
+			MethodList childrenCallees= new MethodList(); 
+				ExtendedCallees.addAll(this.Callees); 
+				if(AlgoFinal.InterfaceImplementationFlag==true) {
+					ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
+				}
+				if(AlgoFinal.InheritanceFlag==true) {
+					ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
+
+				}
+
+			
+				ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
+
+	}
 		
-		if(this.FirstTimeCallees==false) {
-				MethodList childrenCallees= new MethodList(); 
-					ExtendedCallees.addAll(this.Callees); 
-					if(AlgoFinal.InterfaceImplementationFlag==true) {
-						ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
-					}
-					if(AlgoFinal.InheritanceFlag==true) {
-						ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
-
-					}
-
-					this.FirstTimeCallees=true; 
-					ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
-
-		}
+	
+	
+	return ExtendedCallees; 
+			
+		
 			
 		
 		
-		return ExtendedCallees; 
+		
 	}
 		/////////////////////////////////////////////////////////////////////////
 
@@ -662,31 +739,84 @@ return OuterCallees;
 	}
 
 /////////////////////////////////////////////////////////////////////////////////
-	public MethodList getExtendedCallers(Requirement requirement) {
-		
-			if(this.FirstTimeCallers==false) {
+	public MethodList getExtendedCallers() {
+		//RECURSION 
+//		if(this.FirstTimeCallers==false &&  AlgoFinal.RecursiveDescent==true && this.VisitedFlag==false) {
+//		
+//			this.VisitedFlag=true; 
+//
+//			 MethodList SuperclassCallers= new MethodList(); 
+//					for(Method caller: this.Callers) {
+//						if(!caller.Owner.ID.equals(this.Owner.ID)) {
+//							ExtendedCallers.add(caller); 
+//						}else {
+//							caller.getExtendedCallers(requirement); 
+//							
+//						}
+//					}
+//					if(AlgoFinal.InheritanceFlag==true) {
+//					for(Method caller: getInheritanceCallers(SuperclassCallers)) {
+//						if(!caller.Owner.ID.equals(this.Owner.ID)) {
+//							ExtendedCallers.add(caller); 
+//						}else {
+//							caller.getExtendedCallers(requirement); 
+//							
+//
+//						}
+//					}
+//					}
+//					if(AlgoFinal.InterfaceImplementationFlag==true) {
+//						for(Method caller: getInterfaceImplementationCallers(ExtendedCallers)) {
+//							if(!caller.Owner.ID.equals(this.Owner.ID)) {
+//								ExtendedCallers.add(caller); 
+//							}else {
+//								caller.getExtendedCallers(requirement); 
+//								
+//
+//							}
+//						}
+//					}
+//					
+//					
+//					ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
+//					
+//					
+//					
+//					
+//		}//NO RECURSION 
+//		else 
 			
-
+			if(ExtendedCallers==null ) {
+			
+				
+				
+				ExtendedCallers=new MethodList(); 
 				 MethodList SuperclassCallers= new MethodList(); 
 						ExtendedCallers.addAll(this.Callers); 
+			
 						if(AlgoFinal.InheritanceFlag==true) {
 						ExtendedCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
+						
 						}
 						if(AlgoFinal.InterfaceImplementationFlag==true) {
 						ExtendedCallers.addAll(getInterfaceImplementationCallers(ExtendedCallers)); 
+							
 						}
 						
-						this.FirstTimeCallers=true; 
 						ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
+						
+						
+						
+						
+			
+		}
+	
+	
+		 
+	
 
-			}
-		
-		
-			 
-		
-
-		return ExtendedCallers; 
-	}
+	return ExtendedCallers; 
+}
 	/////////////////////////////////////////////////////////////////////////
 
 private MethodList getInterfaceImplementationCallers(MethodList ExtendedCallers) {
@@ -719,7 +849,7 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 				
 				//Recursive Call 
 				if(AlgoFinal.InheritanceRecursion==true) {
-					System.out.println("yes");
+//					System.out.println("yes");
 					mysuperclass.getInheritanceCallers(SuperclassCallers); 	
 					
 				
@@ -744,7 +874,29 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 		// TODO Auto-generated method stub
 		return this.Callees; 
 	}
+	public MethodList getCalleesShell() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+//		for(String key: DatabaseInput.MethodHashMap.keySet()) {
+//			DatabaseInput.MethodHashMap.get(key).VisitedFlag=false; 
+//		}
+		
+		MethodList Callees =getExtendedCallees(); 
+//		this.FirstTimeCallees=true; 
+		return Callees; 
+	}
+	public MethodList getCallersShell() {
+		// TODO Auto-generated method stub
 
+		// TODO Auto-generated method stub
+//		for(String key: DatabaseInput.MethodHashMap.keySet()) {
+//			DatabaseInput.MethodHashMap.get(key).VisitedFlag=false; 
+//		}
+		
+		MethodList Callers =getExtendedCallers(); 
+//		this.FirstTimeCallers=true; 
+		return Callers; 
+	
+	}
 
 
 
