@@ -59,7 +59,9 @@ import mypackage.Requirement;
 public class AlgoFinal extends JFrame {
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
-	public static boolean InheritanceRecursion=true; 
+	
+	
+	public static boolean InheritanceRecursion=false; 
 	
 	public static boolean RecursiveDescent=true; 
 	/**
@@ -1403,7 +1405,7 @@ public class AlgoFinal extends JFrame {
 		 System.out.println("YES3");	
 		 RemainingpredictionValues=SubstractPredictionValues(TotalPredictionValues, OwnerClassPredictionValues); 
 		 System.out.println("YES4");
-//		 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+		 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
 		 System.out.println("YES5");
 		 LogInfo.updateResultsLog(TotalPattern, TotalPredictionValues, ProgramName,"TOTAL  PREDICTION", "total prediction values");
 		 System.out.println("YES6");
@@ -1673,20 +1675,20 @@ public class AlgoFinal extends JFrame {
 	public static void main(String[] args) throws Exception {
 		
 		
-//		String ProgramName = "chess";
-//		AlgoFinal frame = new AlgoFinal(
-//				ProgramName);
-
-		String ProgramName2 = "gantt";
-		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
+		String ProgramName = "chess";
+		AlgoFinal frame = new AlgoFinal(
+				ProgramName);
+//
+//		String ProgramName2 = "gantt";
+//			 frame = new AlgoFinal(ProgramName2);
 		
 //		String ProgramName2 = "dummy";
 //		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 
 //		String ProgramName3 = "itrust";
-//			 frame = new AlgoFinal(ProgramName3);
-//
-//		
+//		AlgoFinal	 frame = new AlgoFinal(ProgramName3);
+
+		
 //		String ProgramName4 = "jhotdraw";
 //				frame = new AlgoFinal(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

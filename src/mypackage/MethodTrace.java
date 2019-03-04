@@ -158,8 +158,9 @@ public final class MethodTrace {
 		
 	}
 	/************************************************************************************************************************************************/
-	/************************************************************************************************************************************************/
-	public void UpdateCallersCallees(LinkedHashMap<String, LogInfo> LogInfoHashMap)
+	/**
+	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
+	public void UpdateCallersCallees(LinkedHashMap<String, LogInfo> LogInfoHashMap) throws CloneNotSupportedException
 			
 			
 			{
@@ -208,8 +209,10 @@ public final class MethodTrace {
 		List<String> OuterCalleesFinal= new ArrayList<String>(); 
 		List<String> OuterCalleesFinalPredictions= new ArrayList<String>(); 
 		List<String> OuterCalleesFinalOwners= new ArrayList<String>(); 
-
-		
+		List<String> ExtendedCallees= new ArrayList<String>(); 
+		List<String> ExtendedCalleesPredictions= new ArrayList<String>(); 
+		List<String> ExtendedCallers= new ArrayList<String>(); 
+		List<String> ExtendedCallersPredictions= new ArrayList<String>(); 
 		
 		String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
 		
@@ -504,6 +507,33 @@ SetPredictionsSetOwners(callee, this, OuterCalleesFinalPredictions, OuterCallees
 
 
 }	
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//FINAL CALLEES
+for(Method callee: this.Method.getCallersShell()) {
+	ExtendedCallees.add(callee.toString()); 
+	ExtendedCalleesPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+
+
+}	
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//FINAL CALLEES
+for(Method caller: this.Method.getCalleesShell()) {
+ExtendedCallers.add(caller.toString()); 
+ExtendedCallersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+
+
+}	
+
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersFinal(ExtendedCallers);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersPredictionsFinal(ExtendedCallersPredictions);
+			
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCalleesFinal(ExtendedCallees);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCalleesPredictionsFinal(ExtendedCalleesPredictions);
+
 
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersFinal(OuterCallersFinal);
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setOuterCallersPredictionsFinal(OuterCallersFinalPredictions);

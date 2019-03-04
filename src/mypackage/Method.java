@@ -187,7 +187,7 @@ public class Method {
 				//			+	", requirementsGold="
 				//				+ requirementsGold.toString() + 
 //				+Owner.toString()+"]"
-//				+"[ ClassID"+Owner.ID+"  ClassName "+Owner.classname +" ]"
+				+"[ ClassID="+Owner.ID+"  ClassName="+Owner.classname +" ]"
 				;
 	}
 	//////////////////////////////////////////////////////////////////////////////////
@@ -606,100 +606,7 @@ return OuterCallees;
 	//////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 	public MethodList getExtendedCallees() throws CloneNotSupportedException {
-////		if(this.FirstTimeCallees==false && !VisitedCallees.contains(this) && AlgoFinal.RecursiveDescent==true) {
-//		
-//		//RECURSION 
-//		if(this.FirstTimeCallees==false && AlgoFinal.RecursiveDescent==true ) {
-//			
-//					
-//			this.VisitedFlag=true; 
-//				
-//				MethodList childrenCallees= new MethodList(); 
-////					ExtendedCallees.addAll(this.Callees); 
-//					for(Method callee: this.Callees) {
-//						if(!callee.Owner.ID.equals(this.Owner.ID)) {
-//							ExtendedCallees.add(callee); 
-//						}else {
-//							ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
-//							
-//						}
-//					}
-//					if(AlgoFinal.InterfaceImplementationFlag==true) {
-////						ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
-//						for(Method callee:getInterfaceImplementationCallees(ExtendedCallees)) {
-//							if(!callee.Owner.ID.equals(this.Owner.ID)) {
-//								ExtendedCallees.add(callee); 
-//							}else {
-//								ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
-//								
-//							}
-//						}
-//					}
-//					if(AlgoFinal.InheritanceFlag==true) {
-////						ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
-//						for(Method callee:getInheritanceCallees(ExtendedCallees, childrenCallees)) {
-//							if(!callee.Owner.ID.equals(this.Owner.ID)) {
-//								ExtendedCallees.add(callee); 
-//							}else {
-//								ExtendedCallees.addAll(callee.getExtendedCallees(requirement)); 
-//								
-//							}
-//						}
-//					}
-//
-//					 
-//					ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
-//
-//		} //NO RECURSION 
-//		if etended callee not null return extendedcsll
-//			extendedcalee is empty
-//					MethodList childrenCallees= new MethodList(); 
-//						x.addAll(this.Callees); 
-//						if(AlgoFinal.InterfaceImplementationFlag==true) {
-//							x.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
-//						}
-//						if(AlgoFinal.InheritanceFlag==true) {
-//							x.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
-//
-//						}
-//
-//						if (flag)
-///						loop x
-//							if outer 
-//							    extendedcalee . add
-//							    else
-//							    	extendedcallee.addall(getextendedcalle)
-//			
-//	
-//	
-//	}
-			
-		
-		
-		
-		
-		
-		
-		/********************************************************************************/
-		/********************************************************************************/
 
-		//PREVIOUS VERSION WITHOUT RECURSIVE DESCENT 
-//		if(ExtendedCallees==null) {
-//			ExtendedCallees= new MethodList(); 
-//			MethodList childrenCallees= new MethodList(); 
-//				ExtendedCallees.addAll(this.Callees); 
-//				if(AlgoFinal.InterfaceImplementationFlag==true) {
-//					ExtendedCallees.addAll(getInterfaceImplementationCallees(ExtendedCallees)); 
-//				}
-//				if(AlgoFinal.InheritanceFlag==true) {
-//					ExtendedCallees.addAll(getInheritanceCallees(ExtendedCallees, childrenCallees)); 
-//
-//				}
-//
-//			
-//				ExtendedCallees=RemoveDuplicates(ExtendedCallees); 
-//
-//	}
 		/********************************************************************************/
 		/********************************************************************************/
 		if (ExtendedCallees!=null) {return ExtendedCallees; }
@@ -780,80 +687,7 @@ return OuterCallees;
 
 /////////////////////////////////////////////////////////////////////////////////
 	public MethodList getExtendedCallers() {
-		//RECURSION 
-//		if(this.FirstTimeCallers==false &&  AlgoFinal.RecursiveDescent==true && this.VisitedFlag==false) {
-//		
-//			this.VisitedFlag=true; 
-//
-//			 MethodList SuperclassCallers= new MethodList(); 
-//					for(Method caller: this.Callers) {
-//						if(!caller.Owner.ID.equals(this.Owner.ID)) {
-//							ExtendedCallers.add(caller); 
-//						}else {
-//							caller.getExtendedCallers(requirement); 
-//							
-//						}
-//					}
-//					if(AlgoFinal.InheritanceFlag==true) {
-//					for(Method caller: getInheritanceCallers(SuperclassCallers)) {
-//						if(!caller.Owner.ID.equals(this.Owner.ID)) {
-//							ExtendedCallers.add(caller); 
-//						}else {
-//							caller.getExtendedCallers(requirement); 
-//							
-//
-//						}
-//					}
-//					}
-//					if(AlgoFinal.InterfaceImplementationFlag==true) {
-//						for(Method caller: getInterfaceImplementationCallers(ExtendedCallers)) {
-//							if(!caller.Owner.ID.equals(this.Owner.ID)) {
-//								ExtendedCallers.add(caller); 
-//							}else {
-//								caller.getExtendedCallers(requirement); 
-//								
-//
-//							}
-//						}
-//					}
-//					
-//					
-//					ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
-//					
-//					
-//					
-//					
-//		}//NO RECURSION 
-//		else 
-			
 
-		
-		
-//RECURSION WITHOUT RECURSIVE DESCENT 		
-//			if(ExtendedCallers==null ) {
-//			
-//				
-//				
-//				ExtendedCallers=new MethodList(); 
-//				 MethodList SuperclassCallers= new MethodList(); 
-//						ExtendedCallers.addAll(this.Callers); 
-//			
-//						if(AlgoFinal.InheritanceFlag==true) {
-//						ExtendedCallers.addAll(getInheritanceCallers(SuperclassCallers)); 
-//						
-//						}
-//						if(AlgoFinal.InterfaceImplementationFlag==true) {
-//						ExtendedCallers.addAll(getInterfaceImplementationCallers(ExtendedCallers)); 
-//							
-//						}
-//						
-//						ExtendedCallers=RemoveDuplicates(ExtendedCallers); 
-//						
-//						
-//						
-//						
-//			
-//		}
 	
 		
 		
