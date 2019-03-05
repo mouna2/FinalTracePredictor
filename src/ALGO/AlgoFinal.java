@@ -59,11 +59,12 @@ import mypackage.Requirement;
 public class AlgoFinal extends JFrame {
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
+	public static boolean RecursiveDescent=false; 
+	
 	
 	
 	public static boolean InheritanceRecursion=false; 
-	
-	public static boolean RecursiveDescent=true; 
+
 	/**
 	 * Run a SQL command which does not return a recordset:
 	 * CREATE/INSERT/UPDATE/DELETE/DROP/etc.
@@ -91,7 +92,9 @@ public class AlgoFinal extends JFrame {
 
 	PredictionEvaluation TotalPattern = new PredictionEvaluation();
 	PredictionEvaluation RemainingPattern = new PredictionEvaluation();
-	PredictionEvaluation NonOwnerClassPattern = new PredictionEvaluation();
+	PredictionEvaluation Step2Pattern = new PredictionEvaluation();
+	PredictionEvaluation Step3Pattern = new PredictionEvaluation();
+	PredictionEvaluation Step4Pattern = new PredictionEvaluation();
 
 	
 	
@@ -198,6 +201,9 @@ public class AlgoFinal extends JFrame {
 		
 		PredictionValues TotalPredictionValues = new PredictionValues(); 
 		PredictionValues RemainingpredictionValues = new PredictionValues(); 
+		PredictionValues Step2PredictionValues = new PredictionValues(); 
+		PredictionValues Step3PredictionValues = new PredictionValues(); 
+		PredictionValues Step4PredictionValues = new PredictionValues(); 
 		PredictionValues PredictionClassTraceBefore = new PredictionValues(); 
 		PredictionValues PredictionClassTraceAfter = new PredictionValues(); 
 		 PredictionValues OwnerClassPredictionValues = new PredictionValues(); 
@@ -806,7 +812,7 @@ public class AlgoFinal extends JFrame {
 			ITERATION++;
 			
 		}
-		
+		ComputeStepResults(Step2Pattern, Step2PredictionValues, LogInfoHashMap, ProgramName,  "Step 2", "Step 2 Prediction Values", OwnerClassPredictionValues); 
 		System.out.println("ITERATION  "+ITERATION);
 		System.out.println("ITERATION  "+ITERATION);
 
@@ -1009,7 +1015,8 @@ public class AlgoFinal extends JFrame {
 
 				}
 				
-		
+				ComputeStepResults(Step3Pattern, Step3PredictionValues, LogInfoHashMap, ProgramName, "Step 3", "Step 3 Prediction Values", Step2PredictionValues); 
+
 		
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////
@@ -1320,7 +1327,8 @@ public class AlgoFinal extends JFrame {
 			
 		}
 		
-				
+		ComputeStepResults(Step4Pattern, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4", "Step 4 Prediction Values", Step3PredictionValues); 
+
 				
 				
 				
@@ -1385,9 +1393,11 @@ public class AlgoFinal extends JFrame {
 		LogInfo.WriteMethodCalls(ProgramName);
 		System.out.println("RemainingpredictionValues"+RemainingpredictionValues);
 		System.out.println("OWNERRRRRRRRRR");
-		LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, RemainingPattern, ProgramName, RemainingpredictionValues, LogInfoHashMap);
-		System.out.println("RemainingpredictionValues"+TotalPattern);
-		LogInfo.updateResultsLog(RemainingPattern, RemainingpredictionValues, ProgramName, "NON OWNER CLASS PRED", "non owner class prediction values");
+//		ComputeStepResults(RemainingPattern, RemainingpredictionValues, LogInfoHashMap, ProgramName, "Steps 1+2+3+4", "Steps 1+2+3+4 prediction values"); 
+		
+//		LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, RemainingPattern, ProgramName, RemainingpredictionValues, LogInfoHashMap);
+//		System.out.println("RemainingpredictionValues"+TotalPattern);
+//		LogInfo.updateResultsLog(RemainingPattern, RemainingpredictionValues, ProgramName, "NON OWNER CLASS PRED", "non owner class prediction values");
 
 
 
@@ -1401,13 +1411,15 @@ public class AlgoFinal extends JFrame {
 		 LogInfo.updateInheritanceLogs(ProgramName, MethodTracesHashmapValues, LogInfoHashMap); 
 		ResetAllTraceSetFlags(methodtraces2HashMap);
 		 System.out.println("YES2");
-		 LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, TotalPattern, ProgramName, TotalPredictionValues, LogInfoHashMap);
-		 System.out.println("YES3");	
-		 RemainingpredictionValues=SubstractPredictionValues(TotalPredictionValues, OwnerClassPredictionValues); 
-		 System.out.println("YES4");
-		 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
-		 System.out.println("YES5");
-		 LogInfo.updateResultsLog(TotalPattern, TotalPredictionValues, ProgramName,"TOTAL  PREDICTION", "total prediction values");
+		 PredictionValues zeroPred= new PredictionValues(0,0,0); 
+			ComputeStepResults(TotalPattern, TotalPredictionValues, LogInfoHashMap, ProgramName, "TOTAL  PREDICTION", "total prediction values", zeroPred); 
+
+		 
+
+		 
+		 
+//	 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+
 		 System.out.println("YES6");
 		 LogInfo.closeLogFile(); 
 		
@@ -1421,6 +1433,15 @@ public class AlgoFinal extends JFrame {
 	
 	
 	
+
+	private void ComputeStepResults(PredictionEvaluation step2Pattern2, PredictionValues step2PredictionValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, String ProgramName, String Step, String PredictionValues, PredictionValues step1PredictionValues) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, step2Pattern2, ProgramName, step2PredictionValues, LogInfoHashMap);
+		System.out.println("RemainingpredictionValues"+TotalPattern);
+		 PredictionValues SubstractedPredictionValues = SubstractPredictionValues(step2PredictionValues, step1PredictionValues); 
+
+		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues);
+	}
 
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
@@ -1678,7 +1699,7 @@ public class AlgoFinal extends JFrame {
 		String ProgramName = "chess";
 		AlgoFinal frame = new AlgoFinal(
 				ProgramName);
-//
+
 //		String ProgramName2 = "gantt";
 //			 frame = new AlgoFinal(ProgramName2);
 		
@@ -1686,11 +1707,11 @@ public class AlgoFinal extends JFrame {
 //		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 
 //		String ProgramName3 = "itrust";
-//		AlgoFinal	 frame = new AlgoFinal(ProgramName3);
+//			 frame = new AlgoFinal(ProgramName3);
 
 		
 //		String ProgramName4 = "jhotdraw";
-//				frame = new AlgoFinal(ProgramName4);
+//			frame = new AlgoFinal(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);

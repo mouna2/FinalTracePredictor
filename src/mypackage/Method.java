@@ -187,7 +187,7 @@ public class Method {
 				//			+	", requirementsGold="
 				//				+ requirementsGold.toString() + 
 //				+Owner.toString()+"]"
-				+"[ ClassID="+Owner.ID+"  ClassName="+Owner.classname +" ]"
+//				+"[ ClassID="+Owner.ID+"  ClassName="+Owner.classname +" ]"
 				;
 	}
 	//////////////////////////////////////////////////////////////////////////////////

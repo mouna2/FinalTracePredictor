@@ -1193,44 +1193,52 @@ public class LogInfo {
 		LogInfo.bwfile1.write(precisionRecall+"                  "+ProgramName+"                     "+TotalPattern.toString());
 		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TP/(TP+TN+FP+FN+E)
-		//LogInfo.bwfile1.newLine();
+		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS N: "+(float)TotalPattern.TrueNegative/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TN/(TP+TN+FP+FN+E)
-		//LogInfo.bwfile1.newLine();
+		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS E: "+(float)TotalPattern.E/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E));//E/(TP+TN+FP+FN+E)
 		LogInfo.bwfile1.newLine();
 		if(TotalPattern.TruePositive+TotalPattern.FalsePositive!=0) {
 			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalsePositive)); //TP/(TP+FP)); 
-			//LogInfo.bwfile1.newLine();
+			LogInfo.bwfile1.newLine();
+		}else {
+			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+0); 
+			LogInfo.bwfile1.newLine();
 		}
 		if(TotalPattern.TrueNegative+TotalPattern.FalseNegative!=0) {
 			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+(float)TotalPattern.TrueNegative/(TotalPattern.TrueNegative+TotalPattern.FalseNegative)); //TN/(FN+TN)
 			LogInfo.bwfile1.newLine();
+		}else {
+			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+0); 
+			LogInfo.bwfile1.newLine();
 		}
 		if(TotalPattern.TruePositive+TotalPattern.FalseNegative!=0) {
 			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalseNegative)); //TP/(TP+FN)
-			//LogInfo.bwfile1.newLine();
+			LogInfo.bwfile1.newLine();
+		}else {
+			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+0); 
+			LogInfo.bwfile1.newLine();
 		}
 		if(TotalPattern.FalsePositive+TotalPattern.TrueNegative!=0) {
 			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+(float)TotalPattern.TrueNegative/(TotalPattern.FalsePositive+TotalPattern.TrueNegative)); //TN/(FP+TN)
-			//LogInfo.bwfile1.newLine();
+			LogInfo.bwfile1.newLine();
+		}else {
+			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+0); 
+			LogInfo.bwfile1.newLine();
 		}
 				
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(PredictionValues+"     "+ProgramName+"                     "+ownerClassPredictionValues.toString());
-		//LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" RANDOM APPROACH T: "+ (float)ownerClassPredictionValues.T/(ownerClassPredictionValues.T+ownerClassPredictionValues.N));
-	//	LogInfo.bwfile1.newLine();
-
-		LogInfo.bwfile1.write(" RANDOM APPROACH N: "+ (float)ownerClassPredictionValues.N/(ownerClassPredictionValues.T+ownerClassPredictionValues.N));
+		
 		LogInfo.bwfile1.newLine();
 
 		LogInfo.bwfile1.write("PREDICTION PERCENTAGE T: "+ (float)ownerClassPredictionValues.T/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-		//LogInfo.bwfile1.newLine();
+		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE N: "+ (float)ownerClassPredictionValues.N/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-		//LogInfo.bwfile1.newLine();
+		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE E: "+ (float)ownerClassPredictionValues.E/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
 		LogInfo.bwfile1.newLine();
-		
+		LogInfo.bwfile1.newLine();
+		LogInfo.bwfile1.write(PredictionValues+"     "+ProgramName+"                     "+ownerClassPredictionValues.toString());
+		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.write("-------------------------------------------------------------------");
 		LogInfo.bwfile1.newLine();
 	}

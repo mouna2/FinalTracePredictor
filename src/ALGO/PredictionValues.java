@@ -39,9 +39,15 @@ public class PredictionValues {
 				remainingpredictionValues.E++; 
 
 			}
+		}
+		public PredictionValues(int t, int n, int e) {
+			super();
+			T = t;
+			N = n;
+			E = e;
 		} 
 		
-		
+		public PredictionValues() {} 
 		
 		
 }
