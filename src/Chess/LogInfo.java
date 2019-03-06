@@ -649,7 +649,7 @@ public class LogInfo {
 
 	public static BufferedWriter bwfile1 = null;
 	public static BufferedWriter bwTraceClass = null;
-	
+	public static BufferedWriter bwfileCumulative = null;
 	public List<String> getExtendedCallers() {
 		return ExtendedCallersText;
 	}
@@ -1002,6 +1002,10 @@ public class LogInfo {
 			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
 				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+				
+				File  file2log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChessCumulative.txt");
+				FileOutputStream	 fosfila2 = new FileOutputStream(file2log);
+					bwfileCumulative = new BufferedWriter(new OutputStreamWriter(fosfila2));
 
 				
 				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesChess.txt");
@@ -1187,60 +1191,148 @@ public class LogInfo {
 	}
 	
 	
-	public static void updateResultsLog(PredictionEvaluation TotalPattern,  PredictionValues ownerClassPredictionValues, String ProgramName, String precisionRecall, String PredictionValues) throws IOException {
+	
+	
+	
+	public static void ComputePrecisionAndRecall2(
+			HashMap<String, MethodTrace> methodTraceHashMap,
+			PredictionEvaluation Pattern, String ProgramName,  PredictionValues ownerClassPredictionValues, LinkedHashMap<String, LogInfo> logInfoHashMap) throws SQLException {
 		// TODO Auto-generated method stub
+	Pattern.ResetCounters(Pattern);
 
-		LogInfo.bwfile1.write(precisionRecall+"                  "+ProgramName+"                     "+TotalPattern.toString());
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TP/(TP+TN+FP+FN+E)
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS N: "+(float)TotalPattern.TrueNegative/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TN/(TP+TN+FP+FN+E)
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS E: "+(float)TotalPattern.E/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E));//E/(TP+TN+FP+FN+E)
-		LogInfo.bwfile1.newLine();
-		if(TotalPattern.TruePositive+TotalPattern.FalsePositive!=0) {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalsePositive)); //TP/(TP+FP)); 
-			LogInfo.bwfile1.newLine();
-		}else {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+0); 
-			LogInfo.bwfile1.newLine();
-		}
-		if(TotalPattern.TrueNegative+TotalPattern.FalseNegative!=0) {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+(float)TotalPattern.TrueNegative/(TotalPattern.TrueNegative+TotalPattern.FalseNegative)); //TN/(FN+TN)
-			LogInfo.bwfile1.newLine();
-		}else {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+0); 
-			LogInfo.bwfile1.newLine();
-		}
-		if(TotalPattern.TruePositive+TotalPattern.FalseNegative!=0) {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalseNegative)); //TP/(TP+FN)
-			LogInfo.bwfile1.newLine();
-		}else {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+0); 
-			LogInfo.bwfile1.newLine();
-		}
-		if(TotalPattern.FalsePositive+TotalPattern.TrueNegative!=0) {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+(float)TotalPattern.TrueNegative/(TotalPattern.FalsePositive+TotalPattern.TrueNegative)); //TN/(FP+TN)
-			LogInfo.bwfile1.newLine();
-		}else {
-			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+0); 
-			LogInfo.bwfile1.newLine();
-		}
+		for (String mykey : methodTraceHashMap.keySet()) {
+			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
+			
+			if(ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")){
+				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
+						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
+						) {
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
+					Pattern.UpdateCounters(Result, Pattern);
+					
+
+
+				}
 				
-		
-		LogInfo.bwfile1.newLine();
+//				ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
 
-		LogInfo.bwfile1.write("PREDICTION PERCENTAGE T: "+ (float)ownerClassPredictionValues.T/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE N: "+ (float)ownerClassPredictionValues.N/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE E: "+ (float)ownerClassPredictionValues.E/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write(PredictionValues+"     "+ProgramName+"                     "+ownerClassPredictionValues.toString());
-		LogInfo.bwfile1.newLine();
-		LogInfo.bwfile1.write("-------------------------------------------------------------------");
-		LogInfo.bwfile1.newLine();
+			}else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
+			
+				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
+					) {
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),
+							methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
+					Pattern.UpdateCounters(Result, Pattern);
+				
+				
+
+
+				}
+//				ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+
+			}
+
+		
+
+			
+
+
+		}
+		System.out.println(Pattern.toString());
+
+	}
+	public static void updateResultsLog(PredictionEvaluation TotalPattern,  PredictionValues ownerClassPredictionValues, String ProgramName, String precisionRecall, String PredictionValues, String Type) throws IOException {
+		// TODO Auto-generated method stub
+		
+		//CODE  TO PASTE INTO EXCEL SPREADSHEET 
+		if(Type.equals("INDIVIDUAL") || Type.equals("CUMULATIVE") ) {
+			LogInfo.bwfile1.write(TotalPattern.TruePositive+","+TotalPattern.TrueNegative+","+TotalPattern.FalsePositive+","+TotalPattern.FalseNegative+","+TotalPattern.E);
+			
+			LogInfo.bwfile1.write(","+ownerClassPredictionValues.T+","+ownerClassPredictionValues.N+","+ownerClassPredictionValues.E+",");
+	
+//			LogInfo.bwfile1.newLine();
+
+		
+			if(Type.equals("CUMULATIVE")) {
+				LogInfo.bwfile1.newLine();
+			}
+			
+		
+		}
+		
+		//END CODE  TO PASTE INTO EXCEL SPREADSHEET 
+//		else if(Type.equals("CUMULATIVE")) {
+//			LogInfo.bwfileCumulative.write(TotalPattern.TruePositive+","+TotalPattern.TrueNegative+","+TotalPattern.FalsePositive+","+TotalPattern.FalseNegative+","+TotalPattern.E);
+//			
+//			LogInfo.bwfileCumulative.write(","+ownerClassPredictionValues.T+","+ownerClassPredictionValues.N+","+ownerClassPredictionValues.E);
+//	
+//			LogInfo.bwfileCumulative.newLine();
+//		}
+		
+
+
+		
+		
+		
+//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TP/(TP+TN+FP+FN+E)
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TN/(TP+TN+FP+FN+E)
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS E: "+Type+"   "+(float)TotalPattern.E/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E));//E/(TP+TN+FP+FN+E)
+//		LogInfo.bwfile1.newLine();
+//		if(TotalPattern.TruePositive+TotalPattern.FalsePositive!=0) {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalsePositive)); //TP/(TP+FP)); 
+//			LogInfo.bwfile1.newLine();
+//		}else {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+Type+"   "+0); 
+//			LogInfo.bwfile1.newLine();
+//		}
+//		if(TotalPattern.TrueNegative+TotalPattern.FalseNegative!=0) {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.TrueNegative+TotalPattern.FalseNegative)); //TN/(FN+TN)
+//			LogInfo.bwfile1.newLine();
+//		}else {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+Type+"   "+0); 
+//			LogInfo.bwfile1.newLine();
+//		}
+//		if(TotalPattern.TruePositive+TotalPattern.FalseNegative!=0) {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalseNegative)); //TP/(TP+FN)
+//			LogInfo.bwfile1.newLine();
+//		}else {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+Type+"   "+0); 
+//			LogInfo.bwfile1.newLine();
+//		}
+//		if(TotalPattern.FalsePositive+TotalPattern.TrueNegative!=0) {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.FalsePositive+TotalPattern.TrueNegative)); //TN/(FP+TN)
+//			LogInfo.bwfile1.newLine();
+//		}else {
+//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+Type+"   "+0); 
+//			LogInfo.bwfile1.newLine();
+//		}
+//				
+//		
+//		LogInfo.bwfile1.newLine();
+//
+//		LogInfo.bwfile1.write("PREDICTION PERCENTAGE T: "+Type+"   "+ (float)ownerClassPredictionValues.T/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE N: "+Type+"   "+ (float)ownerClassPredictionValues.N/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE E: "+Type+"   "+ (float)ownerClassPredictionValues.E/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.newLine();
+		
+		
+		
+		
+		//ORIGINAL CODE FOR PRECISION RECALL 
+//		LogInfo.bwfile1.write(precisionRecall+"                  "+ProgramName+"                     "+TotalPattern.toString());
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write(PredictionValues+"     "+ProgramName+"                     "+ownerClassPredictionValues.toString());
+//		LogInfo.bwfile1.newLine();
+//		LogInfo.bwfile1.write("-------------------------------------------------------------------");
+		//END ORIGINAL CODE FOR PRECISION RECALL 
+//		LogInfo.bwfile1.newLine();
 	}
 	public static void updateTableLog(String ProgramName, Collection<MethodTrace> MethodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) throws IOException {
 		// TODO Auto-generated method stub			
@@ -1517,6 +1609,7 @@ public class LogInfo {
 		// TODO Auto-generated method stub
 		LogInfo.bwfile1.newLine();
 		LogInfo.bwfile1.close(); 
+//		LogInfo.bwfileCumulative.close(); 
 	}
 	public static void updateInheritanceLogs(String ProgramName, Collection<MethodTrace> MethodTracesHashmapValues,
 			LinkedHashMap<String, LogInfo> LogInfoHashMap) throws IOException {

@@ -59,9 +59,10 @@ import mypackage.Requirement;
 public class AlgoFinal extends JFrame {
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
-	public static boolean RecursiveDescent=false; 
+	public static boolean RecursiveDescent=true; 
 	
-	
+	 PredictionValues zeroPred= new PredictionValues(0,0,0); 
+
 	
 	public static boolean InheritanceRecursion=false; 
 
@@ -96,7 +97,10 @@ public class AlgoFinal extends JFrame {
 	PredictionEvaluation Step3Pattern = new PredictionEvaluation();
 	PredictionEvaluation Step4Pattern = new PredictionEvaluation();
 
-	
+	PredictionEvaluation Step2PatternCumulative = new PredictionEvaluation();
+	PredictionEvaluation Step3PatternCumulative = new PredictionEvaluation();
+	PredictionEvaluation Step4PatternCumulative = new PredictionEvaluation();
+
 	
 	
 	
@@ -204,6 +208,8 @@ public class AlgoFinal extends JFrame {
 		PredictionValues Step2PredictionValues = new PredictionValues(); 
 		PredictionValues Step3PredictionValues = new PredictionValues(); 
 		PredictionValues Step4PredictionValues = new PredictionValues(); 
+		PredictionValues Step4PredictionValuesCumulative = new PredictionValues(); 
+
 		PredictionValues PredictionClassTraceBefore = new PredictionValues(); 
 		PredictionValues PredictionClassTraceAfter = new PredictionValues(); 
 		 PredictionValues OwnerClassPredictionValues = new PredictionValues(); 
@@ -385,8 +391,8 @@ public class AlgoFinal extends JFrame {
 			
 
 			LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
-			
-			LogInfo.updateResultsLog(TotalPattern, OwnerClassPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values");
+
+			LogInfo.updateResultsLog(TotalPattern, OwnerClassPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
 		
 		
 		
@@ -394,7 +400,8 @@ public class AlgoFinal extends JFrame {
 		int ITERATION = 0;
 	//	MethodTracesHashmapValues=methodtraces2HashMap.values(); 
 
-		
+		ComputeStepResults2(Step2PatternCumulative, OwnerClassPredictionValues, LogInfoHashMap, ProgramName, "Step 1 Cumulative", "Step 1 Prediction Values Cumulative", zeroPred); 
+
 		
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////
@@ -813,6 +820,8 @@ public class AlgoFinal extends JFrame {
 			
 		}
 		ComputeStepResults(Step2Pattern, Step2PredictionValues, LogInfoHashMap, ProgramName,  "Step 2", "Step 2 Prediction Values", OwnerClassPredictionValues); 
+		ComputeStepResults2(Step2PatternCumulative, Step2PredictionValues, LogInfoHashMap, ProgramName, "Step 2 Cumulative", "Step 2 Prediction Values Cumulative", zeroPred); 
+
 		System.out.println("ITERATION  "+ITERATION);
 		System.out.println("ITERATION  "+ITERATION);
 
@@ -1016,6 +1025,7 @@ public class AlgoFinal extends JFrame {
 				}
 				
 				ComputeStepResults(Step3Pattern, Step3PredictionValues, LogInfoHashMap, ProgramName, "Step 3", "Step 3 Prediction Values", Step2PredictionValues); 
+				ComputeStepResults2(Step3PatternCumulative, Step3PredictionValues, LogInfoHashMap, ProgramName, "Step 3 Cumulative", "Step 3 Prediction Values Cumulative", zeroPred); 
 
 		
 			//////////////////////////////////////////////////////////////////////////////////////////
@@ -1330,7 +1340,8 @@ public class AlgoFinal extends JFrame {
 		ComputeStepResults(Step4Pattern, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4", "Step 4 Prediction Values", Step3PredictionValues); 
 
 				
-				
+		ComputeStepResults2(Step4PatternCumulative, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4 Cumulative", "Step 4 Prediction Values Cumulative", zeroPred); 
+
 				
 				
 				int counter2=0; 
@@ -1411,7 +1422,6 @@ public class AlgoFinal extends JFrame {
 		 LogInfo.updateInheritanceLogs(ProgramName, MethodTracesHashmapValues, LogInfoHashMap); 
 		ResetAllTraceSetFlags(methodtraces2HashMap);
 		 System.out.println("YES2");
-		 PredictionValues zeroPred= new PredictionValues(0,0,0); 
 			ComputeStepResults(TotalPattern, TotalPredictionValues, LogInfoHashMap, ProgramName, "TOTAL  PREDICTION", "total prediction values", zeroPred); 
 
 		 
@@ -1438,9 +1448,23 @@ public class AlgoFinal extends JFrame {
 		// TODO Auto-generated method stub
 		LogInfo.ComputePrecisionAndRecall(methodtraces2HashMap, step2Pattern2, ProgramName, step2PredictionValues, LogInfoHashMap);
 		System.out.println("RemainingpredictionValues"+TotalPattern);
-		 PredictionValues SubstractedPredictionValues = SubstractPredictionValues(step2PredictionValues, step1PredictionValues); 
+		
+ 
+		PredictionValues SubstractedPredictionValues = SubstractPredictionValues(step2PredictionValues, step1PredictionValues); 
 
-		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues);
+		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues, "INDIVIDUAL");
+	}
+	
+	
+	private void ComputeStepResults2(PredictionEvaluation step2Pattern2, PredictionValues step2PredictionValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, String ProgramName, String Step, String PredictionValues, PredictionValues step1PredictionValues) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		LogInfo.ComputePrecisionAndRecall2(methodtraces2HashMap, step2Pattern2, ProgramName, step2PredictionValues, LogInfoHashMap);
+		System.out.println("RemainingpredictionValues"+TotalPattern);
+		
+		PredictionValues SubstractedPredictionValues = SubstractPredictionValues(step2PredictionValues, step1PredictionValues); 
+
+
+		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues, "CUMULATIVE");
 	}
 
 	/************************************************************************************************************************************************/
@@ -1696,22 +1720,22 @@ public class AlgoFinal extends JFrame {
 	public static void main(String[] args) throws Exception {
 		
 		
-		String ProgramName = "chess";
-		AlgoFinal frame = new AlgoFinal(
-				ProgramName);
-
+//		String ProgramName = "chess";
+//		AlgoFinal frame = new AlgoFinal(
+//				ProgramName);
+//
 //		String ProgramName2 = "gantt";
-//			 frame = new AlgoFinal(ProgramName2);
+//		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 		
 //		String ProgramName2 = "dummy";
 //		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 
 //		String ProgramName3 = "itrust";
-//			 frame = new AlgoFinal(ProgramName3);
+//		AlgoFinal	 frame = new AlgoFinal(ProgramName3);
 
 		
-//		String ProgramName4 = "jhotdraw";
-//			frame = new AlgoFinal(ProgramName4);
+		String ProgramName4 = "jhotdraw";
+		AlgoFinal	frame = new AlgoFinal(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
