@@ -61,6 +61,8 @@ public class AlgoFinal extends JFrame {
 	public static boolean InterfaceImplementationFlag=true; 
 	public static boolean RecursiveDescent=true; 
 	
+	public static boolean InheritanceOnFlagSteps2And4=false; 
+
 	 PredictionValues zeroPred= new PredictionValues(0,0,0); 
 
 	
@@ -647,6 +649,8 @@ public class AlgoFinal extends JFrame {
 			// SUPERCLASSES , CHILDREN , INTERFACES , IMPLEMENTATIONS  PATTERN 3
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////
+			if(InheritanceOnFlagSteps2And4==true) {
+				
 			
 			for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 
@@ -675,7 +679,7 @@ public class AlgoFinal extends JFrame {
 
 			}
 	
-			
+			}
 			
 			
 			
@@ -1170,6 +1174,8 @@ public class AlgoFinal extends JFrame {
 			// SUPERCLASSES , CHILDREN , INTERFACES , IMPLEMENTATIONS  PATTERN 3
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////
+			if(InheritanceOnFlagSteps2And4==true) {
+				
 			
 			for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 				String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
@@ -1199,7 +1205,7 @@ public class AlgoFinal extends JFrame {
 
 			}
 	
-			
+			}
 			
 			
 			

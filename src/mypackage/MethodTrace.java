@@ -526,7 +526,7 @@ ExtendedCallers.add(caller.toString());
 ExtendedCallersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 
 
-}	
+}		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+this.Method.ID).prediction);
 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersFinal(ExtendedCallers);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersPredictionsFinal(ExtendedCallersPredictions);

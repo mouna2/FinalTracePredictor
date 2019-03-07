@@ -851,6 +851,7 @@ public class LogInfo {
 				+","+OuterCallersFinalList+","+OuterCallersFinalPredictionsList+","+OuterCallersFinalOwnersList
 				+","+OuterCalleesFinalList+","+OuterCalleesFinalPredictionsList+","+OuterCalleesFinalOwnersList
 				+","+ExtendedCalleesList+","+ExtendedCalleesPredictionsList+","+ExtendedCallersList+","+ExtendedCallersPredictionsList
+				+","+Prediction	
 				+","+PrecisionRecall	
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
@@ -1368,6 +1369,7 @@ public class LogInfo {
 					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
 					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedCallers, ExtendedCallersPredictions,"
+					+ "Prediction,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfileChess.newLine();
@@ -1393,7 +1395,7 @@ public class LogInfo {
 					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
 					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedCallers, ExtendedCallersPredictions,"
-
+					+ "Prediction,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile2.newLine();
@@ -1443,7 +1445,7 @@ public class LogInfo {
 					+" NEWOuterCallers, NEWOuterCallersPredictions, NEWOuterCallersOwners,"
 					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedCallers, ExtendedCallersPredictions,"
-
+					+ "Prediction,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile3.newLine();
@@ -1472,7 +1474,7 @@ public class LogInfo {
 					+" NEWOuterCallees, NEWOuterCalleesPredictions, NEWOuterCalleesOwners,"
 					//END OF THESE TWO LINES CAN BE REMOVED 
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedCallers, ExtendedCallersPredictions,"
-
+					+ "Prediction,"
 					+ "PrecisionRecall,IterationValues"
 					);
 			LogInfo.bwfile4.newLine();
