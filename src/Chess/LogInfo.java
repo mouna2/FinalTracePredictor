@@ -1145,23 +1145,32 @@ public class LogInfo {
 			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
 			
 			if(ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")){
+				if(methodTrace.isTraceSet()) {
+					String Result="E"; 
+					Pattern.UpdateCounters(Result, Pattern);
+
+				}
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
 						&& !methodTrace.isTraceSet() ) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
+					
 					if(!Result.equals("E")) {
 						methodTrace.setTraceSet(true);
 					}
-
 
 				}
 				
 				ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
 
 			}else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
-			
+				if(methodTrace.isTraceSet()) {
+					String Result="E"; 
+					Pattern.UpdateCounters(Result, Pattern);
+
+				}
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 						&& !methodTrace.isTraceSet()) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),

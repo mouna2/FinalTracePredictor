@@ -372,6 +372,7 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 			HashMap<String, List<String>> classMethodsHashMap,
 			HashMap<Method, HashMap<Requirement, String>> FinalMethodHashMapReqGolds) throws SQLException {
 
+		methodtraceHashMap = new LinkedHashMap<String, MethodTrace>();
 
 		
 		CreateClassHashMap(conn);
